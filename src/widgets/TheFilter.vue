@@ -1,7 +1,10 @@
 <template>
     <div class="flex justify-between">
-        <div class="flex">
-            <UserLogo v-for="(user) in users" :key="user.id" :user="user" />
+        <div class="flex items-center">
+            <UserLogo v-for="(user) in displayedUsers" :key="user.id" :user="user" />
+            <div v-if="remainingUsers > 0" class="flex items-center justify-center w-8 h-8 rounded-full bg-gray-200">
+                <span class="text-sm font-medium text-[#AFB9BB]">+{{ remainingUsers }}</span>
+            </div>
         </div>
         <div class="flex gap-x-5 ">
             <blockquote>
@@ -27,8 +30,17 @@
 
 <script setup>
 import { useUserStore } from '@/stores';
+import { computed } from 'vue';
 
 const userStore = useUserStore();
 const users = userStore.listUsers
 import UserLogo from './UserLogo.vue';
+
+const displayedUsers = computed(() => {
+    return users.slice(0, 5)
+})
+
+const remainingUsers = computed(() => {
+    return users.length - 5 > 0 ? users.length - 5 : 0;
+})
 </script>

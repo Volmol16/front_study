@@ -2,6 +2,68 @@ import { defineStore } from "pinia";
 
 export const useUserStore = defineStore('user', {
     state: () => ({
+        listOrderCards: [
+            {
+                id: 1,
+                image: '/image/works/1.png',
+                title: 'Дипломная работа',
+                DateStart: '7 июля',
+                DateEnd: '12 июля',
+                imageUser: '/image/works/user.svg',
+                nameUser: 'Алексей',
+                rating: '8.5',
+            },
+            {
+                id: 2,
+                image: '/image/works/2.png',
+                title: 'Дипломная работа',
+                DateStart: '7 июля',
+                DateEnd: '12 июля',
+                imageUser: '/image/works/user.svg',
+                nameUser: 'Никита',
+                rating: '8.9',
+            },
+            {
+                id: 3,
+                image: '/image/works/3.png',
+                title: 'Дипломная работа',
+                DateStart: '7 июля',
+                DateEnd: '12 июля',
+                imageUser: '/image/works/user.svg',
+                nameUser: 'Никита',
+                rating: '8.9',
+            },
+            {
+                id: 4,
+                image: '/image/works/4.png',
+                title: 'Дипломная работа',
+                DateStart: '7 июля',
+                DateEnd: '12 июля',
+                imageUser: '/image/works/user.svg',
+                nameUser: 'Никита',
+                rating: '8.9',
+            },
+            {
+                id: 5,
+                image: '/image/works/5.png',
+                title: 'Дипломная работа',
+                DateStart: '7 июля',
+                DateEnd: '12 июля',
+                imageUser: '/image/works/user.svg',
+                nameUser: 'Никита',
+                rating: '8.9',
+            },
+            {
+                id: 6,
+                image: '/image/works/6.png',
+                title: 'Дипломная работа',
+                DateStart: '7 июля',
+                DateEnd: '12 июля',
+                imageUser: '/image/works/user.svg',
+                nameUser: 'Никита',
+                rating: '8.9',
+            },
+        ],
         listUsers: [
             {
                 id: 1,
@@ -76,7 +138,127 @@ export const useUserStore = defineStore('user', {
                     { name: 'Общая математика', },
                 ],
                 description: 'Я являюсь химиком'
-            }
+            },
+            {
+                id: 4,
+                name: "Виктория Лытова",
+                jobTitle: "Специалист в химии",
+                state: "Unreviewed",
+                image: "/image/avatar/LogoUser.png",
+                email: 'sQpMl@example.com',
+                social: [
+                    { platform: 'telegram', link: 'https://t.me/victoria_lytova' },
+                ],
+                speciality: 'Химия',
+                university: 'СПбГУ',
+                Faculty: 'Химическая',
+                department: 'Химия',
+                course: '3',
+                studentID: '123456789',
+                Disciplines: [
+                    { name: 'Общая физика',},
+                    { name: 'Общая биология', },
+                    { name: 'Общая химия', },
+                    { name: 'Общая математика', },
+                ],
+                description: 'Я являюсь химиком'
+            },
+            {
+                id: 5,
+                name: "Виктория Лытова",
+                jobTitle: "Специалист в химии",
+                state: "Unreviewed",
+                image: "/image/avatar/LogoUser.png",
+                email: 'sQpMl@example.com',
+                social: [
+                    { platform: 'telegram', link: 'https://t.me/victoria_lytova' },
+                ],
+                speciality: 'Химия',
+                university: 'СПбГУ',
+                Faculty: 'Химическая',
+                department: 'Химия',
+                course: '3',
+                studentID: '123456789',
+                Disciplines: [
+                    { name: 'Общая физика',},
+                    { name: 'Общая биология', },
+                    { name: 'Общая химия', },
+                    { name: 'Общая математика', },
+                ],
+                description: 'Я являюсь химиком'
+            },
+            {
+                id: 6,
+                name: "Виктория Лытова",
+                jobTitle: "Специалист в химии",
+                state: "Unreviewed",
+                image: "/image/avatar/LogoUser.png",
+                email: 'sQpMl@example.com',
+                social: [
+                    { platform: 'telegram', link: 'https://t.me/victoria_lytova' },
+                ],
+                speciality: 'Химия',
+                university: 'СПбГУ',
+                Faculty: 'Химическая',
+                department: 'Химия',
+                course: '3',
+                studentID: '123456789',
+                Disciplines: [
+                    { name: 'Общая физика',},
+                    { name: 'Общая биология', },
+                    { name: 'Общая химия', },
+                    { name: 'Общая математика', },
+                ],
+                description: 'Я являюсь химиком'
+            },
+            {
+                id: 7,
+                name: "Виктория Лытова",
+                jobTitle: "Специалист в химии",
+                state: "Unreviewed",
+                image: "/image/avatar/LogoUser.png",
+                email: 'sQpMl@example.com',
+                social: [
+                    { platform: 'telegram', link: 'https://t.me/victoria_lytova' },
+                ],
+                speciality: 'Химия',
+                university: 'СПбГУ',
+                Faculty: 'Химическая',
+                department: 'Химия',
+                course: '3',
+                studentID: '123456789',
+                Disciplines: [
+                    { name: 'Общая физика',},
+                    { name: 'Общая биология', },
+                    { name: 'Общая химия', },
+                    { name: 'Общая математика', },
+                ],
+                description: 'Я являюсь химиком'
+            },
+            {
+                id: 8,
+                name: "Виктория Лытова",
+                jobTitle: "Специалист в химии",
+                state: "Unreviewed",
+                image: "/image/avatar/LogoUser.png",
+                email: 'sQpMl@example.com',
+                social: [
+                    { platform: 'telegram', link: 'https://t.me/victoria_lytova' },
+                ],
+                speciality: 'Химия',
+                university: 'СПбГУ',
+                Faculty: 'Химическая',
+                department: 'Химия',
+                course: '3',
+                studentID: '123456789',
+                Disciplines: [
+                    { name: 'Общая физика',},
+                    { name: 'Общая биология', },
+                    { name: 'Общая химия', },
+                    { name: 'Общая математика', },
+                ],
+                description: 'Я являюсь химиком'
+            },
         ]
     })
 })

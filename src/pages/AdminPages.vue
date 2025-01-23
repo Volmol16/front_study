@@ -1,8 +1,6 @@
-<!-- src/pages/AdminPages.vue -->
 <template>
     <div>
         <AdminTable />
-
     </div>
 </template>
 

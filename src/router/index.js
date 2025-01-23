@@ -4,6 +4,14 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: '/myOrders',
+      component: () => import('@/pages/MyOrdersPages.vue'),
+    },
+    {
+      path: '/listOrders',
+      component: () => import('@/pages/ListOrdersPages.vue'),
+    },
+    {
       path: '/adminPanel',
       component: () => import('@/pages/AdminPages.vue'),
       children: [
