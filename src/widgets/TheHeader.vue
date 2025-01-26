@@ -4,8 +4,8 @@
             <router-link class="text-3xl font-semibold text-black uppercase" to="/">Logo</router-link>
         </button>
         <div class="flex gap-x-8">
-            <router-link class="uppercase" to="/myOrders"
-                :class="route.path === '/myOrders' ? 'text-[#8C8C8E]' : ''">Мои заказы</router-link>
+            <router-link class="uppercase" to="/myBegunOrder"
+                :class="route.path === '/myBegunOrder' ? 'text-[#8C8C8E]' : ''">Мои заказы</router-link>
             <router-link class="uppercase" to="/myReviews"
                 :class="route.path === '/myReviews' ? 'text-[#8C8C8E]' : ''">Мои отзывы</router-link>
             <router-link class="uppercase" to="/сommunities"

@@ -12,6 +12,8 @@ export const useUserStore = defineStore('user', {
                 imageUser: '/image/works/user.svg',
                 nameUser: 'Алексей',
                 rating: '8.5',
+                description: 'If you find this creation appealing, why not extend your appreciation to the talented minds Ive mentioned? ',
+                price: 5000,
             },
             {
                 id: 2,
@@ -22,6 +24,8 @@ export const useUserStore = defineStore('user', {
                 imageUser: '/image/works/user.svg',
                 nameUser: 'Никита',
                 rating: '8.9',
+                description: 'If you find this creation appealing, why not extend your appreciation to the talented minds Ive mentioned? ',
+                price: 5000,
             },
             {
                 id: 3,
@@ -32,6 +36,8 @@ export const useUserStore = defineStore('user', {
                 imageUser: '/image/works/user.svg',
                 nameUser: 'Никита',
                 rating: '8.9',
+                description: 'If you find this creation appealing, why not extend your appreciation to the talented minds Ive mentioned? ',
+                price: 5000,
             },
             {
                 id: 4,
@@ -42,6 +48,8 @@ export const useUserStore = defineStore('user', {
                 imageUser: '/image/works/user.svg',
                 nameUser: 'Никита',
                 rating: '8.9',
+                description: 'If you find this creation appealing, why not extend your appreciation to the talented minds Ive mentioned? ',
+                price: 5000,
             },
             {
                 id: 5,
@@ -52,6 +60,8 @@ export const useUserStore = defineStore('user', {
                 imageUser: '/image/works/user.svg',
                 nameUser: 'Никита',
                 rating: '8.9',
+                description: 'If you find this creation appealing, why not extend your appreciation to the talented minds Ive mentioned? ',
+                price: 5000,
             },
             {
                 id: 6,
@@ -62,6 +72,8 @@ export const useUserStore = defineStore('user', {
                 imageUser: '/image/works/user.svg',
                 nameUser: 'Никита',
                 rating: '8.9',
+                description: 'If you find this creation appealing, why not extend your appreciation to the talented minds Ive mentioned? ',
+                price: 5000,
             },
         ],
         listUsers: [

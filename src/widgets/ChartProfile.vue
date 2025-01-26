@@ -19,7 +19,8 @@
             <img class="w-full" src="/image/charts/Ellipse16.png" alt="Изображение">
             <h2 class="mt-5 text-xl">У вас еще нет ни одного заказа</h2>
         </div>
-        <button class="w-full py-3 bg-white rounded-lg text-xl font-medium text-black mt-9">Найти заказы</button>
+        <button @click="$router.push('/listOrders')"
+            class="w-full py-3 bg-white rounded-lg text-xl font-medium text-black mt-9">Найти заказы</button>
     </div>
 </template>
 

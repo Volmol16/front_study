@@ -1,16 +1,16 @@
 <template>
     <div
         class="fixed top-0 right-0 w-full h-full bg-black bg-opacity-50 flex justify-end items-start transition-transform duration-300">
-        <div class="bg-[#E9E9EB] rounded-lg w-[500px] h-full shadow-lg overflow-y-auto">
-            <div class="flex p-4 pt-10 justify-between items-center">
+        <div class="bg-[#E9E9EB] rounded-lg w-[500px] h-full shadow-lg overflow-y-auto py-10">
+            <div class="flex p-4 justify-between items-center">
                 <div class="flex items-center gap-x-4">
                     <img class="w-14" :src="user.image" alt="">
                     <h1 class="text-xl font-medium">{{ user.name }}</h1>
                 </div>
                 <button @click="$emit('close-modal')"><img src="/image/modal/Close_LG.svg" alt="Close"></button>
             </div>
-            <hr class="bg-[#D9D9D9] h-0.5 mt-5">
-            <div class="p-4 mt-8">
+            <LineHR />
+            <div class="px-4 mt-3">
                 <div class="flex">
                     <div class="w-[224px] flex flex-col gap-y-6 text-lg text-[#8C8C8E]">
                         <p>Email:</p>
@@ -45,19 +45,19 @@
                     </div>
                 </div>
             </div>
-            <hr class="bg-[#D9D9D9] h-0.5 mt-5">
-            <div class="p-4">
+            <LineHR />
+            <div class="px-4">
                 <h3 class="text-[#8C8C8E] text-xl">Дисциплины</h3>
                 <p class="mt-5">Дисциплины, которые я решаю:</p>
                 <p v-for="discipline in user.Disciplines" :key="discipline.id">{{ discipline.name }}</p>
             </div>
-            <hr class="bg-[#D9D9D9] h-0.5 mt-5">
-            <div class="p-4">
+            <LineHR />
+            <div class="px-4">
                 <h3 class="text-[#8C8C8E] text-xl">О себе</h3>
                 <p class="mt-5 text-lg leading-6">{{ user.description }}</p>
             </div>
-            <hr class="bg-[#D9D9D9] h-0.5 mt-5">
-            <div class="p-4">
+            <LineHR />
+            <div class="px-4">
                 <div class="flex justify-between gap-x-4">
                     <button class="w-full py-3 bg-white rounded-lg text-xl font-medium text-black">Одобрить</button>
                     <button class="w-full py-3 bg-black rounded-lg text-xl font-medium text-white">Отказ</button>
@@ -72,6 +72,7 @@
 
 
 <script setup>
+import LineHR from '@/ui/LineHR.vue';
 import { computed } from 'vue';
 
 

@@ -8,7 +8,7 @@ const router = createRouter({
       redirect: '/account',
     },
     {
-      path: '/myOrders',
+      path: '/myBegunOrder',
       component: () => import('@/pages/MyOrdersPages.vue'),
     },
     {
@@ -18,7 +18,33 @@ const router = createRouter({
     {
       name: 'Account',
       path: '/account',
-      component: () => import('@/pages/PersonalAccount.vue'),
+      component: () => import('@/pages/PersonalAccountPages.vue'),
+    },
+    {
+      name: 'orderPage',
+      path: '/orderPage/:id', // Динамический сегмент id на уровне родительского маршрута
+      component: () => import('@/pages/OrderPages.vue'),
+      props: true,
+      children: [
+        {
+          name: 'order-details',
+          path: 'order', 
+          component: () => import('@/components/OrderPagesOrder.vue'),
+          props: true
+        },
+        {
+          name: 'order-examination', // добавьте имя
+          path: 'examination',
+          component: () => import('@/components/OrderPagesExamination.vue'),
+          props: true
+        },
+        {
+          name: 'order-editing', // добавьте имя
+          path: 'editing',
+          component: () => import('@/components/OrderPagesEditing.vue'),
+          props: true
+        }
+      ]
     },
     {
       path: '/adminPanel',
