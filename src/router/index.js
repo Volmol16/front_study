@@ -47,6 +47,18 @@ const router = createRouter({
       ]
     },
     {
+      name: 'customerProfile',
+      path: '/customerProfile/:id',
+      component: () => import('@/pages/CustomerProfilePages.vue'),
+      props: true,
+    },
+    {
+      name: 'customerProfile-messages',
+      path: '/messages/:id',
+      component: () => import('@/pages/CustomerProfileMessagePages.vue'),
+      props: true,
+    },
+    {
       path: '/adminPanel',
       component: () => import('@/pages/AdminPages.vue'),
       children: [
