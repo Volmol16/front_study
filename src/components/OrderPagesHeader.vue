@@ -1,6 +1,6 @@
 <!-- src/components/OrderPagesHeader.vue -->
 <template>
-    <div class="flex justify-between items-center text-xl border-b border-[#D9D9D9]">
+    <div class="flex justify-between text-xl border-b border-[#D9D9D9]">
         <router-link class=" w-[250px] text-center"
             :class="{ 'border-b-2 border-[#8C8C8E]': $route.name === 'order-details' }"
             :to="{ name: 'order-details', params: { id: $route.params.id } }">

@@ -10,7 +10,8 @@
             <button class="px-8 py-3 bg-white text-black text-xl rounded-lg mt-6">Вступить</button>
         </div>
         <div class="flex gap-x-[50px]">
-            <ChartAuctionCard v-for="card in card.slice(0, 3)" :key="card.id" :card="card" />
+            <ChartAuctionCard v-for="card in card.slice(0, 2)" :key="card.id" :card="card" />
+            <img src="/image/charts/Frame 35.png" alt="Frame">
         </div>
 
     </div>

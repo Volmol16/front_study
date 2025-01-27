@@ -17,17 +17,12 @@
                     </div>
                 </div>
             </div>
-            <ButtonTransitionOrderPage :card="card">
-                <template #default>
-                    <button class="w-full py-3 bg-black text-white text-xl rounded-lg mt-4">Откликнуться</button>
-                </template>
-            </ButtonTransitionOrderPage>
+            <button class="w-full py-3 bg-black text-white text-xl rounded-lg mt-4">Откликнуться</button>
         </div>
     </div>
 </template>
 
 <script setup>
-import ButtonTransitionOrderPage from '@/ui/ButtonTransitionOrderPage.vue';
 defineProps({
     card: {
         type: Object,

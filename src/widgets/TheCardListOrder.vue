@@ -1,6 +1,6 @@
 <template>
     <ButtonTransitionOrderPage :card="card">
-        <div class="flex flex-col p-4">
+        <div class="flex flex-col p-4 cursor-pointer">
             <img class="w-[214px] h-[194px]" :src="card.image" alt="Image" loading="lazy">
             <div class="mt-4">
                 <h3 class="text-xl font-semibold">{{ card.title }}</h3>

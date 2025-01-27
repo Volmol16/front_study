@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { defineProps, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useUserStore } from '@/stores';
 import OrderPagesCard from '@/widgets/OrderPagesCard.vue'
 

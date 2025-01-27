@@ -22,7 +22,7 @@ const router = createRouter({
     },
     {
       name: 'orderPage',
-      path: '/orderPage/:id', // Динамический сегмент id на уровне родительского маршрута
+      path: '/orderPage/:id', 
       component: () => import('@/pages/OrderPages.vue'),
       props: true,
       children: [
@@ -33,13 +33,13 @@ const router = createRouter({
           props: true
         },
         {
-          name: 'order-examination', // добавьте имя
+          name: 'order-examination', 
           path: 'examination',
           component: () => import('@/components/OrderPagesExamination.vue'),
           props: true
         },
         {
-          name: 'order-editing', // добавьте имя
+          name: 'order-editing', 
           path: 'editing',
           component: () => import('@/components/OrderPagesEditing.vue'),
           props: true
