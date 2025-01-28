@@ -22,7 +22,8 @@
             </div>
             <div class="mt-8 flex gap-x-4">
                 <button class="px-8 py-3 bg-white text-black text-xl rounded-lg">Вступить</button>
-                <button class="px-8 py-3 bg-black text-white text-xl rounded-lg">Создать</button>
+                <button @click="$router.push('/communitiesCreate')"
+                    class="px-8 py-3 bg-black text-white text-xl rounded-lg">Создать</button>
             </div>
         </div>
         <img src="/image/charts/Group 68.png" alt="Image">
