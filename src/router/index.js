@@ -21,6 +21,16 @@ const router = createRouter({
       component: () => import('@/pages/PersonalAccountPages.vue'),
     },
     {
+      name: 'communities',
+      path: '/communities',
+      component: () => import('@/pages/CommunitiesPages.vue'),
+    },
+    {
+      name: 'communities-create',
+      path: '/communitiesCreate',
+      component: () => import('@/pages/CreateCommunitiesPages.vue'),
+    },
+    {
       name: 'orderPage',
       path: '/orderPage/:id', 
       component: () => import('@/pages/OrderPages.vue'),
@@ -45,6 +55,11 @@ const router = createRouter({
           props: true
         }
       ]
+    },
+    {
+      name: 'myReviews',
+      path: '/myReviews',
+      component: () => import('@/pages/MyReviewsPages.vue')
     },
     {
       name: 'customerProfile',

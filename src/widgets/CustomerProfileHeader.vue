@@ -7,7 +7,7 @@
                 <h2 class="text-2xl font-medium" v-if="user.nameUser">{{ user.nameUser }}</h2>
                 <span class="flex gap-x-2 mt-2" v-if="user.rating"><img src="/image/works/star.svg" alt="Star">{{
                     user.rating
-                    }}</span>
+                }}</span>
                 <div class="flex gap-x-2 mt-2">
                     <span v-for="card in work" :key="card.id"
                         class="px-4 py-1 text-sm bg-[#AFB9BB] rounded-2xl text-black">{{
@@ -18,7 +18,8 @@
         <div class="flex gap-x-4 items-center">
             <button><img src="/image/profile/Danger.svg" alt="Danger"></button>
             <button><img src="/image/profile/heart.svg" alt="heart"></button>
-            <button class="px-8 py-3 bg-black text-white rounded-lg text-xl font-medium">Написать</button>
+            <button @click="goToCustomerProfileMessage"
+                class="px-8 py-3 bg-black text-white rounded-lg text-xl font-medium">Написать</button>
         </div>
     </div>
     <div v-else>
@@ -27,6 +28,9 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 const props = defineProps({
     user: {
         type: Object,
@@ -37,4 +41,11 @@ const props = defineProps({
         required: true
     }
 })
+
+const goToCustomerProfileMessage = () => {
+    router.push({
+        name: 'customerProfile-messages',
+        params: { id: props.user.id }
+    })
+}
 </script>

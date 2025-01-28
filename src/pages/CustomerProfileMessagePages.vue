@@ -1,8 +1,9 @@
 <template>
-    <div>
-        <div>
-            <h1>Чат</h1>
-            <button><img src="/image/profile/Magnifer.svg" alt="Magnifer"></button>
-        </div>
+    <div class="max-w-[800px] mx-auto">
+        <CustomerProfileMessageBody />
     </div>
 </template>
+
+<script setup>
+import CustomerProfileMessageBody from '@/components/СustomerProfileMessageBody.vue';
+</script>
