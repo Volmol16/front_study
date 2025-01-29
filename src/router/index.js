@@ -31,6 +31,17 @@ const router = createRouter({
       component: () => import('@/pages/CreateCommunitiesPages.vue'),
     },
     {
+      name: 'communities-list',
+      path: '/communitiesList',
+      component: () => import('@/pages/CommunitiesListPages.vue'),
+    },
+    {
+      name: 'communities-page',
+      path: '/communitiesPage/:id',
+      component: () => import('@/pages/CommunityDetailedPages.vue'),
+      props: true
+    },
+    {
       name: 'orderPage',
       path: '/orderPage/:id', 
       component: () => import('@/pages/OrderPages.vue'),

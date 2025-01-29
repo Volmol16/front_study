@@ -7,7 +7,8 @@
             <div class="flex gap-x-4 mt-8">
                 <button @click="$router.push('/communitiesCreate')"
                     class="px-8 py-3 bg-black rounded-lg text-xl font-medium text-white">Создать</button>
-                <button class="px-8 py-3 bg-white rounded-lg text-xl font-medium text-black">Присоедениться</button>
+                <button @click="$router.push('/communitiesList')"
+                    class="px-8 py-3 bg-white rounded-lg text-xl font-medium text-black">Присоедениться</button>
             </div>
         </div>
     </div>

@@ -298,6 +298,33 @@ export const useUserStore = defineStore('user', {
                 rating: 3,
                 text: 'Следует отметить, что высокое качество позиционных исследований способствует подготовке и реализации экономической целесообразности принимаемых решений.'
             }
+        ],
+        CommunititesCards: [
+            {
+                id: 1,
+                title: 'Название',
+                rating: 4.8,
+                description: 'We are a web and mobile design and development agency. Making websites and apps, creating brand identities, and launching startups. ',
+                member: 12,
+                image: '/image/communities/1.png',
+            },
+            {
+                id: 2,
+                title: 'Название',
+                rating: 3.8,
+                description: 'We are a web and mobile design and development agency. Making websites and apps, creating brand identities, and launching startups. ',
+                member: 6,
+                image: '/image/communities/2.png',
+            },
+            {
+                id: 3,
+                title: 'Название',
+                rating: 2.8,
+                description: 'We are a web and mobile design and development agency. Making websites and apps, creating brand identities, and launching startups. ',
+                member: 4,
+                image: '/image/communities/3.png',
+            },
+            
         ]
     })
 })
