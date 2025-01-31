@@ -307,6 +307,52 @@ export const useUserStore = defineStore('user', {
                 description: 'We are a web and mobile design and development agency. Making websites and apps, creating brand identities, and launching startups. ',
                 member: 12,
                 image: '/image/communities/1.png',
+                price: 2500,
+                imageUser: '/image/works/user.svg',
+                sybject: [
+                    {
+                        name: 'Русский язык',
+                        member: 8,
+                        rating: 4.8,
+                    },
+                    {
+                        name: 'Английский язык',
+                        member: 3,
+                        rating: 4.8,
+                    },
+                    {
+                        name: 'Французский язык',
+                        member: 6,
+                        rating: 4.8,
+                    }
+                ],
+                captain: [
+                    {
+                        name: 'Дмитрий Иванов',
+                        sybject: 'Математика',
+                        rating: 9.8
+                    }
+                ],
+                team: [
+                    {
+                        name: 'Антон Горелов',
+                        subject: 'Русский язык',
+                        rating: 7.2,
+                        imageUser: '/image/works/user.svg',
+                    },
+                    {
+                        name: 'Вачеслав Стонков',
+                        sybject: 'Математика',
+                        rating: 9,
+                        imageUser: '/image/works/user.svg',
+                    },
+                    {
+                        name: 'Игорь Владимирович',
+                        subject: 'Информатика',
+                        rating: 5,
+                        imageUser: '/image/works/user.svg',
+                    }
+                ]
             },
             {
                 id: 2,
@@ -315,6 +361,53 @@ export const useUserStore = defineStore('user', {
                 description: 'We are a web and mobile design and development agency. Making websites and apps, creating brand identities, and launching startups. ',
                 member: 6,
                 image: '/image/communities/2.png',
+                price: 2500,
+                imageUser: '/image/works/user.svg',
+                sybject: [
+                    {
+                        name: 'Русский язык',
+                        member: 8,
+                        rating: 4.8,
+                        imageUser: '/image/works/user.svg',
+                    },
+                    {
+                        name: 'Английский язык',
+                        member: 3,
+                        rating: 4.8,
+                    },
+                    {
+                        name: 'Французский язык',
+                        member: 6,
+                        rating: 4.8,
+                    }
+                ],
+                captain: [
+                    {
+                        name: 'Дмитрий Иванов',
+                        sybject: 'Математика',
+                        rating: 9.8
+                    }
+                ],
+                team: [
+                    {
+                        name: 'Антон Горелов',
+                        subject: 'Русский язык',
+                        rating: 7.2,
+                        imageUser: '/image/works/user.svg',
+                    },
+                    {
+                        name: 'Вачеслав Стонков',
+                        sybject: 'Математика',
+                        rating: 9,
+                        imageUser: '/image/works/user.svg',
+                    },
+                    {
+                        name: 'Игорь Владимирович',
+                        subject: 'Информатика',
+                        rating: 5,
+                        imageUser: '/image/works/user.svg',
+                    }
+                ]
             },
             {
                 id: 3,
@@ -323,6 +416,52 @@ export const useUserStore = defineStore('user', {
                 description: 'We are a web and mobile design and development agency. Making websites and apps, creating brand identities, and launching startups. ',
                 member: 4,
                 image: '/image/communities/3.png',
+                price: 2500,
+                imageUser: '/image/works/user.svg',
+                sybject: [
+                    {
+                        name: 'Русский язык',
+                        member: 8,
+                        rating: 4.8,
+                    },
+                    {
+                        name: 'Английский язык',
+                        member: 3,
+                        rating: 4.8,
+                    },
+                    {
+                        name: 'Французский язык',
+                        member: 6,
+                        rating: 4.8,
+                    }
+                ],
+                captain: [
+                    {
+                        name: 'Дмитрий Иванов',
+                        sybject: 'Математика',
+                        rating: 9.8
+                    }
+                ],
+                team: [
+                    {
+                        name: 'Антон Горелов',
+                        subject: 'Русский язык',
+                        rating: 7.2,
+                        imageUser: '/image/works/user.svg',
+                    },
+                    {
+                        name: 'Вачеслав Стонков',
+                        sybject: 'Математика',
+                        rating: 9,
+                        imageUser: '/image/works/user.svg',
+                    },
+                    {
+                        name: 'Игорь Владимирович',
+                        subject: 'Информатика',
+                        rating: 5,
+                        imageUser: '/image/works/user.svg',
+                    }
+                ]
             },
             
         ]
