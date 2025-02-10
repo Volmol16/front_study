@@ -3,7 +3,7 @@
         <button>
             <router-link class="text-3xl font-semibold text-black uppercase" to="/">Logo</router-link>
         </button>
-        <div class="flex gap-x-8">
+        <div class="flex gap-x-8" v-if="authStore.isAuth">
             <router-link class="uppercase" to="/myBegunOrder"
                 :class="route.path === '/myBegunOrder' ? 'text-[#8C8C8E]' : ''">Мои заказы</router-link>
             <router-link class="uppercase" to="/myReviews"
@@ -20,6 +20,8 @@
 
 <script setup>
 import { useRoute } from 'vue-router';
+import { useAuthStore } from '@/stores/auth';
 
 const route = useRoute();
+const authStore = useAuthStore();
 </script>
