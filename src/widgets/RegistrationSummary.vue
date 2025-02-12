@@ -19,4 +19,9 @@
 
 <script setup>
 import LoadingFilesForRegistration from '@/ui/LoadingFilesForRegistration.vue';
+import { useAuthStore } from '@/stores/auth';
+
+const authStore = useAuthStore();
+console.log(authStore.user);
+
 </script>

@@ -20,10 +20,10 @@
                 type="password" placeholder="Повторите пароль" v-model="passwordRepeat">
         </div>
         <div class="mt-8 flex flex-col gap-y-3">
-            <BoxingCheckForReg>
+            <BoxingCheckForReg v-model:isChecked="isAgreementChecked">
                 <p>Согласие на обработку персональных данных</p>
             </BoxingCheckForReg>
-            <BoxingCheckForReg>
+            <BoxingCheckForReg v-model:isChecked="isPrivacyPolicyChecked">
                 <p>Соглашаюсь с политикой конфиденциальности</p>
             </BoxingCheckForReg>
         </div>
@@ -33,7 +33,6 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth';
 import { computed, watchEffect, ref } from 'vue';
-import { defineEmits } from 'vue';
 import BoxingCheckForReg from '@/ui/BoxingCheckForReg.vue';
 
 const emit = defineEmits(['update:isValid']);
@@ -41,6 +40,8 @@ const authStore = useAuthStore();
 const auth = computed(() => authStore.user);
 const isDataLoaded = ref(false);
 const passwordRepeat = ref('');
+const isAgreementChecked = ref(false);
+const isPrivacyPolicyChecked = ref(false);
 
 const isFormValid = computed(() => {
     if (!auth.value) return false;
@@ -50,7 +51,9 @@ const isFormValid = computed(() => {
         auth.value.name.trim() !== '' &&
         auth.value.email.trim() !== '' &&
         auth.value.password.trim() !== '' &&
-        auth.value.password === passwordRepeat.value
+        auth.value.password === passwordRepeat.value &&
+        isAgreementChecked.value &&
+        isPrivacyPolicyChecked.value
     // &&
     // // auth.value.socialId.Vk.trim() !== '';
 });

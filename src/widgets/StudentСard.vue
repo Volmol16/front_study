@@ -1,4 +1,3 @@
-<!-- src/widgets/StudentСard.vue -->
 <template>
     <div>
 
@@ -44,7 +43,7 @@
                 <option value="4">4</option>
             </select>
         </div>
-
+        <!-- src/widgets/StudentСard.vue -->
         <div class="flex flex-col gap-y-4 mt-4">
             <LoadingFilesForRegistration>
                 <h4>Прикрепите фото студенческого билета</h4>
@@ -55,7 +54,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watchEffect } from 'vue';
+import { ref, onMounted, computed, watchEffect, watch } from 'vue';
 import { getUniversities, getFaculties, getDepartments } from '@/global/api';
 import { useAuthStore } from '@/stores/auth';
 import LoadingFilesForRegistration from '@/ui/LoadingFilesForRegistration.vue';
@@ -70,10 +69,19 @@ const selectedDepartment = ref('');
 const loading = ref(false);
 const authStore = useAuthStore();
 const emit = defineEmits(['update:isValid']);
-authStore.user.course = course.value;
+
+watch([selectedUniversity, selectedFaculty, selectedDepartment, course], () => {
+    authStore.user.university = selectedUniversity.value;
+    authStore.user.faculty = selectedFaculty.value;
+    authStore.user.department = selectedDepartment.value;
+    authStore.user.course = course.value;
+});
 
 const isFormValid = computed(() => {
-    return selectedUniversity.value && selectedFaculty.value && selectedDepartment.value && course.value
+    return selectedUniversity.value &&
+        selectedFaculty.value &&
+        selectedDepartment.value &&
+        course.value;
 });
 
 watchEffect(() => {
@@ -98,7 +106,6 @@ const fetchFaculties = async () => {
     loading.value = true;
     try {
         const response = await getFaculties(selectedUniversity.value);
-        authStore.user.university = selectedUniversity.value;
         faculties.value = response.results || [];
     } catch (error) {
         console.error('Ошибка получения факультетов:', error);
@@ -115,7 +122,6 @@ const fetchDepartments = async () => {
     loading.value = true;
     try {
         const response = await getDepartments(selectedFaculty.value);
-        authStore.user.faculty = selectedFaculty.value;
         departments.value = response.results || [];
     } catch (error) {
         console.error('Ошибка получения факультетов:', error);
@@ -124,7 +130,4 @@ const fetchDepartments = async () => {
         loading.value = false;
     }
 }
-
-console.log(authStore.user);
-
 </script>
