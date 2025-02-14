@@ -71,10 +71,13 @@ const authStore = useAuthStore();
 const emit = defineEmits(['update:isValid']);
 
 watch([selectedUniversity, selectedFaculty, selectedDepartment, course], () => {
-    authStore.user.university = selectedUniversity.value;
-    authStore.user.faculty = selectedFaculty.value;
-    authStore.user.department = selectedDepartment.value;
-    authStore.user.course = course.value;
+    authStore.profile.university = selectedUniversity.value;
+    authStore.profile.faculty = selectedFaculty.value;
+    authStore.profile.department = selectedDepartment.value;
+    authStore.profile.form_of_study = course.value;
+    authStore.profile.vk_profile = '@test';
+    authStore.profile.telegram_username = '@test';
+    authStore.profile.disciplines = [1];
 });
 
 const isFormValid = computed(() => {

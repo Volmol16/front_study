@@ -5,9 +5,9 @@
             <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
                 type="text" placeholder="Логин*" v-model="auth.username">
             <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
-                type="text" placeholder="Фамилия*" v-model="auth.surname">
+                type="text" placeholder="Фамилия*" v-model="auth.first_name">
             <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
-                type="text" placeholder="Имя*" v-model="auth.name">
+                type="text" placeholder="Имя*" v-model="auth.last_name">
             <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
                 type="text" placeholder="Отчество" v-model="auth.patronymic">
             <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
@@ -35,7 +35,7 @@ import { useAuthStore } from '@/stores/auth';
 import { computed, watchEffect, ref } from 'vue';
 import BoxingCheckForReg from '@/ui/BoxingCheckForReg.vue';
 
-const emit = defineEmits(['update:isValid']);
+const emit = defineEmits(['update:isValid', 'next-step', 'prev-step']);
 const authStore = useAuthStore();
 const auth = computed(() => authStore.user);
 const isDataLoaded = ref(false);
@@ -43,12 +43,14 @@ const passwordRepeat = ref('');
 const isAgreementChecked = ref(false);
 const isPrivacyPolicyChecked = ref(false);
 
+auth.referral_code = 'Afdsfsdf23';
+
 const isFormValid = computed(() => {
     if (!auth.value) return false;
 
     return auth.value.username.trim() !== '' &&
-        auth.value.surname.trim() !== '' &&
-        auth.value.name.trim() !== '' &&
+        auth.value.last_name.trim() !== '' &&
+        auth.value.first_name.trim() !== '' &&
         auth.value.email.trim() !== '' &&
         auth.value.password.trim() !== '' &&
         auth.value.password === passwordRepeat.value &&

@@ -12,9 +12,11 @@
                     <button class="px-8 py-3 bg-white text-black rounded-lg text-xl font-medium leading-7"
                         @click="prevStep" v-if="countPages > 1" :disabled="countPages === 1">Назад</button>
                     <button class="px-8 py-3 bg-black text-white rounded-lg text-xl font-medium leading-7"
-                        v-if="countPages <= 3" @click="nextPage" :disabled="!isValid">
+                        v-if="countPages <= 3" @click="handleClick" :disabled="!isValid">
                         {{ countPages === 3 ? 'Готово' : 'Далее' }}
                     </button>
+                    <button @click="authStore.login"
+                        class="px-8 py-3 bg-black text-white rounded-lg text-xl font-medium">отправить</button>
                 </div>
             </div>
         </div>
@@ -46,14 +48,23 @@ const currentComponent = computed(() => {
     }
 })
 
+const handleClick = () => {
+    if (countPages.value === 3) {
+        authStore.login();
+    } else {
+        nextPage();
+    }
+};
+
+
+
 const nextPage = () => {
     if (countPages.value < 3) {
         countPages.value++;
     }
-    if (countPages.value === 3) {
-        authStore.login();
-    }
+    isValid.value = false; // Сбрасываем isValid после перехода
 };
+
 
 const prevStep = () => {
     if (countPages.value > 1) {
