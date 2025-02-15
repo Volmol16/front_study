@@ -17,6 +17,6 @@ const authStore = useAuthStore();
 
 const handlerFileChange = (event) => {
     const file = event.target.files[0];
-    authStore.student_card.photo = file;
+    authStore.data.student_card.photo = file;
 }
 </script>

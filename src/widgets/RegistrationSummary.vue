@@ -20,9 +20,9 @@
 <script setup>
 import LoadingFilesForRegistration from '@/ui/LoadingFilesForRegistration.vue';
 import { useAuthStore } from '@/stores/auth';
+import { watch } from 'vue';
 
 const authStore = useAuthStore();
-authStore.student_card.photo = 'https://img.freepik.com/free-vector/flat-design-illustration-user-avatar-icon_23-2147532566.jpg';
 console.log(authStore.user, authStore.profile, authStore.student_card);
 
 </script>

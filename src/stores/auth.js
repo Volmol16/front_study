@@ -1,57 +1,59 @@
-import {defineStore} from 'pinia'
+import { defineStore } from "pinia";
+import axios from "axios";
+import { fileToBase64 } from "@/global/fileToBase64";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+export const useAuthStore = defineStore("auth", {
+  state: () => ({
+    isAuth: false,
+    data: {
+      user: {
+        username: "",
+        first_name: "",
+        last_name: "",
+        email: "",
+        password: "",
+        role: "заказчик",
+        referral_code: "Afdsfsdf23",
+      },
+      profile: {
+        university: null,
+        faculty: null,
+        department: null,
+        disciplines: [null],
+        form_of_study: null,
+        vk_profile: "@test",
+        telegram_username: "@test",
+      },
+      student_card: {
+        photo: "",
+      },
+    },
+  }),
+  actions: {
+    async register() {
+      // Добавляем файл
+      const data = {
+        user: this.data.user,
+        profile: this.data.profile,
+        student_card: this.data.student_card.photo,
+      };
 
-export const useAuthStore = defineStore('auth', {
-    state: () => ({
-        isAuth: false,
-            user: {
-              username: "",
-              first_name: "",
-              last_name: "",
-              email: "",
-              password: "",
-              role: "заказчик",
-              referral_code: "Afdsfsdf23",
+      try {
+        const response = await fetch(
+          `${API_BASE_URL}/api/auth/registration/general-info/`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
             },
-            profile: {
-              university: null,
-              faculty: null,
-              department: null,
-              disciplines: [null],
-              form_of_study: null,
-              vk_profile: "@test",
-              telegram_username: "@test"
-            },
-            student_card: {
-              photo: ""
-            } 
-    }),
-    actions: {
-        async login() {
-            try {
-                const requestBody = {
-                    user: this.user,
-                    profile: this.profile,
-                    student_card: this.student_card
-                }
-                const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(requestBody)
-                });
-                const data = await response.json();
-                console.log(data);
-                console.log(requestBody)
-                if (data.token) {
-                    localStorage.setItem('token', data.token);
-                    this.isAuth = true;
-                }
-            } catch (error) {
-                console.error(error);
-            }
-        }
-    }
-})
+            body: JSON.stringify(this.data.user),
+          }
+        );
+        console.log("Данные отправлены:", response);
+      } catch (error) {
+        console.error("Ошибка отправки:", error);
+      }
+    },
+  },
+});

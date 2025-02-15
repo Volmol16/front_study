@@ -32,12 +32,12 @@
 
 <script setup>
 import { useAuthStore } from '@/stores/auth';
-import { computed, watchEffect, ref } from 'vue';
+import { computed, watchEffect, ref, watch } from 'vue';
 import BoxingCheckForReg from '@/ui/BoxingCheckForReg.vue';
 
 const emit = defineEmits(['update:isValid', 'next-step', 'prev-step']);
 const authStore = useAuthStore();
-const auth = computed(() => authStore.user);
+const auth = computed(() => authStore.data.user);
 const isDataLoaded = ref(false);
 const passwordRepeat = ref('');
 const isAgreementChecked = ref(false);
@@ -68,5 +68,8 @@ watchEffect(() => {
     if (auth.value) {
         isDataLoaded.value = true;
     }
+});
+watch(isFormValid, (newVal) => {
+    emit('update:isValid', Boolean(newVal)); // Явное преобразование в boolean
 });
 </script>

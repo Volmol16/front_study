@@ -71,13 +71,13 @@ const authStore = useAuthStore();
 const emit = defineEmits(['update:isValid']);
 
 watch([selectedUniversity, selectedFaculty, selectedDepartment, course], () => {
-    authStore.profile.university = selectedUniversity.value;
-    authStore.profile.faculty = selectedFaculty.value;
-    authStore.profile.department = selectedDepartment.value;
-    authStore.profile.form_of_study = course.value;
-    authStore.profile.vk_profile = '@test';
-    authStore.profile.telegram_username = '@test';
-    authStore.profile.disciplines = [1];
+    authStore.data.profile.university = selectedUniversity.value;
+    authStore.data.profile.faculty = selectedFaculty.value;
+    authStore.data.profile.department = selectedDepartment.value;
+    authStore.data.profile.form_of_study = 1;
+    authStore.data.profile.vk_profile = '@test';
+    authStore.data.profile.telegram_username = '@test';
+    authStore.data.profile.disciplines = [1];
 });
 
 const isFormValid = computed(() => {
@@ -133,4 +133,8 @@ const fetchDepartments = async () => {
         loading.value = false;
     }
 }
+
+watch(isFormValid, (newVal) => {
+    emit('update:isValid', Boolean(newVal)); // Явное преобразование в boolean
+});
 </script>
