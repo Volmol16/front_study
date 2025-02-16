@@ -19,7 +19,10 @@
             <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
                 type="password" placeholder="Повторите пароль" v-model="passwordRepeat">
         </div>
-        <div class="mt-8 flex flex-col gap-y-3">
+        <div>
+            <ForgotThePassword @toggle-auth="$emit('toggle-auth')" :typeAuth="typeAuth" />
+        </div>
+        <div class="mt-4 flex flex-col gap-y-3">
             <BoxingCheckForReg v-model:isChecked="isAgreementChecked">
                 <p>Согласие на обработку персональных данных</p>
             </BoxingCheckForReg>
@@ -34,14 +37,21 @@
 import { useAuthStore } from '@/stores/auth';
 import { computed, watchEffect, ref, watch } from 'vue';
 import BoxingCheckForReg from '@/ui/BoxingCheckForReg.vue';
+import ForgotThePassword from '@/ui/ForgotThePassword.vue';
 
-const emit = defineEmits(['update:isValid', 'next-step', 'prev-step']);
+const emit = defineEmits(['update:isValid', 'next-step', 'prev-step', 'toggle-auth']);
 const authStore = useAuthStore();
 const auth = computed(() => authStore.data.user);
 const isDataLoaded = ref(false);
 const passwordRepeat = ref('');
 const isAgreementChecked = ref(false);
 const isPrivacyPolicyChecked = ref(false);
+
+const props = defineProps({
+    typeAuth: {
+        type: Boolean,
+    }
+})
 
 auth.referral_code = 'Afdsfsdf23';
 

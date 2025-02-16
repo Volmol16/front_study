@@ -49,6 +49,9 @@
                 <h4>Прикрепите фото студенческого билета</h4>
             </LoadingFilesForRegistration>
         </div>
+        <div>
+            <ForgotThePassword @toggle-auth="$emit('toggle-auth')" :typeAuth="typeAuth" />
+        </div>
 
     </div>
 </template>

@@ -6,8 +6,12 @@
             <h1 class="text-4xl font-semibold">Присоединяйтесь к нашей команде!</h1>
             <p class="mt-2">Заполните пожалуйста три формы необходимых для регистрации</p>
             <div class="mt-6">
-                <component :is="currentComponent" @next-step="nextPage" @prev-step="prevStep"
-                    @update:isValid="isValid = $event" />
+                <div class="flex flex-col items-center">
+                    <CountPageRegister :countPages="countPages" />
+                    <component :typeAuth="typeAuth" @toggle-auth="$emit('toggle-auth')" class="mt-8"
+                        :is="currentComponent" @next-step="nextPage" @prev-step="prevStep"
+                        @update:isValid="isValid = $event" />
+                </div>
                 <div class="flex justify-end gap-x-4 mt-8">
                     <button class="px-8 py-3 bg-white text-black rounded-lg text-xl font-medium leading-7"
                         @click="prevStep" v-if="countPages > 1" :disabled="countPages === 1">Назад</button>
@@ -15,8 +19,6 @@
                         @click="handleClick" :disabled="!isValid">
                         {{ countPages === 3 ? 'Готово' : 'Далее' }}
                     </button>
-                    <!-- <button @click="authStore.login"
-                        class="px-8 py-3 bg-black text-white rounded-lg text-xl font-medium">отправить</button> -->
                 </div>
             </div>
         </div>
@@ -27,6 +29,7 @@
 import UserInformation from '@/widgets/UserInformation.vue';
 import StudentСard from '@/widgets/StudentСard.vue';
 import RegistrationSummary from '@/widgets/RegistrationSummary.vue';
+import CountPageRegister from '@/widgets/CountPageRegister.vue';
 import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue';
 import { computed } from 'vue';
@@ -34,6 +37,14 @@ import { computed } from 'vue';
 const countPages = ref(1);
 const isValid = ref(false);
 const authStore = useAuthStore();
+
+const props = defineProps({
+    typeAuth: {
+        type: Boolean,
+    }
+})
+
+const emit = defineEmits(['toggle-auth']);
 
 const currentComponent = computed(() => {
     switch (countPages.value) {
