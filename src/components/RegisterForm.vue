@@ -33,7 +33,9 @@ import CountPageRegister from '@/widgets/CountPageRegister.vue';
 import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue';
 import { computed } from 'vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const countPages = ref(1);
 const isValid = ref(false);
 const authStore = useAuthStore();
@@ -44,7 +46,8 @@ const props = defineProps({
     }
 })
 
-const emit = defineEmits(['toggle-auth']);
+const emit = defineEmits(['toggle-auth', 'registration-success']);
+emit('registration-success');
 
 const currentComponent = computed(() => {
     switch (countPages.value) {
@@ -59,16 +62,20 @@ const currentComponent = computed(() => {
     }
 })
 
-const handleClick = () => {
-    console.log('Click! Page:', countPages.value, 'Valid:', isValid.value);
-
+const handleClick = async () => {
     if (countPages.value === 3) {
-        console.log('Trying to submit...');
-        authStore.register();
+        try {
+            await authStore.register(); // Выполняем регистрацию
+            router.push({ name: 'register-success' }); // Переходим на страницу успеха
+        } catch (error) {
+            console.error("Ошибка регистрации:", error);
+        }
     } else {
         nextPage();
     }
 };
+
+
 
 
 

@@ -1,7 +1,8 @@
 <!-- src/pages/RegisterPages.vue -->
 <template>
     <div class="px-4">
-        <RegisterForm v-if="!typeAuth" @toggle-auth="toggleAuth" :typeAuth="typeAuth" />
+        <RegisterForm v-if="!typeAuth" @toggle-auth="toggleAuth" :typeAuth="typeAuth"
+            @registration-success="handleSuccess" />
         <AuthorizationForm v-else @toggle-auth="toggleAuth" :typeAuth="typeAuth" />
     </div>
 </template>
@@ -16,4 +17,5 @@ const typeAuth = ref(false);
 const toggleAuth = () => {
     typeAuth.value = !typeAuth.value;
 };
+
 </script>

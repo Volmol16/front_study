@@ -6,6 +6,9 @@
         <main v-if="authStore.isAuth" class="mx-10">
             <RouterView />
         </main>
+        <main v-else-if="authStore.isRegistered" class="mx-10">
+            <RegistrySuccessfulPages />
+        </main>
         <main v-else class="mx-10">
             <RegisterPages />
         </main>
@@ -19,6 +22,7 @@
 import Header from './widgets/TheHeader.vue';
 import Footer from './widgets/TheFooter.vue';
 import RegisterPages from './pages/RegisterPages.vue';
+import RegistrySuccessfulPages from './pages/RegistrySuccessfulPages.vue';
 import { useAuthStore } from './stores/auth';
 import { onMounted } from 'vue';
 
@@ -27,5 +31,4 @@ const authStore = useAuthStore();
 onMounted(() => {
     authStore.checkAuth();
 });
-
 </script>

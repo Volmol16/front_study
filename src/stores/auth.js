@@ -1,3 +1,4 @@
+// src/stores/auth.js
 import { defineStore } from "pinia";
 import axios from "axios";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -5,6 +6,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const useAuthStore = defineStore("auth", {
   state: () => ({
     isAuth: false,
+    isRegistered: false,
     data: {
       user: {
         username: "",
@@ -12,68 +14,48 @@ export const useAuthStore = defineStore("auth", {
         last_name: "",
         email: "",
         password: "",
-        role: "исполнитель",
-        referral_code: "Avs3213123",
+        role: "заказчик",
       },
       profile: {
         university: null,
         faculty: null,
         department: null,
-        disciplines: [null],
-        form_of_study: "бакалавр",
-        vk_profile: "@test",
-        telegram_username: "@test",
+        disciplines: [1],
+        form_of_study: null,
+        vk_profile: "",
+        telegram_username: "",
       },
       student_card: {
-        photo: "",
+        photo: "здесь должен быть файл",
       },
     },
   }),
   actions: {
     async register() {
       try {
-        const formData1 = {
-          username: this.data.user.username,
-          first_name: this.data.user.first_name,
-          last_name: this.data.user.last_name,
-          email: this.data.user.email,
-          password: this.data.user.password,
-          role: this.data.user.role,
-          referral_code: this.data.user.referral_code,
-        };
+        const response = await axios.post(
+          `${API_BASE_URL}/api/auth/register/`,
+          this.data,
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        );
 
-        const formData2 = {
-          username: this.data.user.username,
-          role: "исполнитель",
-          university: this.data.profile.university,
-          faculty: this.data.profile.faculty,
-          department: this.data.profile.department,
-          disciplines: this.data.profile.disciplines,
-          form_of_study: this.data.profile.form_of_study,
-          vk_profile: this.data.profile.vk_profile,
-          telegram_username: this.data.profile.telegram_username,
-        };
-
-        const [response1, response2, response3] = await Promise.all([
-          axios.post(
-            `${API_BASE_URL}/api/auth/registration/general-info/`,
-            formData1,
-            {
-              headers: { "Content-Type": "application/json" },
-            }
-          ),
-          axios.post(
-            `${API_BASE_URL}/api/auth/registration/profile`,
-            formData2,
-            {
-              headers: { "Content-Type": "application/json" },
-            }
-          ),
-          axios.post(`${API_BASE_URL}/api/`),
-        ]);
+        this.isRegistered = true;
+        console.log("Успешная регистрация:", response.data);
+        return response.data;
       } catch (error) {
-        console.error("Ошибка отправки:", error);
+        console.error("Ошибка регистрации:", {
+          status: error.response?.status,
+          data: error.response?.data,
+          message: error.message,
+        });
+        throw error;
       }
+    },
+
+    resetRegistration() {
+      this.isRegistered = false;
     },
 
     async login() {
@@ -95,8 +77,7 @@ export const useAuthStore = defineStore("auth", {
 
         this.isAuth = true;
 
-        console.log("Успешная авторизация:", response.data);
-        return response.data;
+        return { success: true, data: response.data };
       } catch (error) {
         console.error("Ошибка авторизации:", {
           status: error.response?.status,
@@ -107,7 +88,7 @@ export const useAuthStore = defineStore("auth", {
       }
     },
 
-    // Добавим метод для проверки аутентификации
+    // метод для проверки аутентификации
     checkAuth() {
       const token = sessionStorage.getItem("access_token");
       this.isAuth = !!token;

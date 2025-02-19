@@ -53,7 +53,6 @@ const props = defineProps({
     }
 })
 
-auth.referral_code = 'Afdsfsdf23';
 
 const isFormValid = computed(() => {
     if (!auth.value) return false;
@@ -66,8 +65,6 @@ const isFormValid = computed(() => {
         auth.value.password === passwordRepeat.value &&
         isAgreementChecked.value &&
         isPrivacyPolicyChecked.value
-    // &&
-    // // auth.value.socialId.Vk.trim() !== '';
 });
 
 watchEffect(() => {

@@ -12,7 +12,7 @@
             </select>
 
             <!-- Факультеты -->
-            <select v-model="selectedFaculty" @click="fetchDepartments" :disabled="!selectedUniversity || loading"
+            <select v-model="selectedFaculty" @change="fetchDepartments" :disabled="!selectedUniversity || loading"
                 class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none">
                 <option value="" disabled>
                     {{ faculties.length ? 'Выберите факультет' : 'Нет доступных факультетов' }}
@@ -23,13 +23,24 @@
             </select>
 
             <!-- Кафедры -->
-            <select v-model="selectedDepartment" :disabled="!selectedFaculty || loading"
+            <select v-model="selectedDepartment" @change="fetchEducationForms" :disabled="!selectedFaculty || loading"
                 class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none">
                 <option value="" disabled>
                     {{ departments.length ? 'Выберите кафедру' : 'Нет доступных кафедр' }}
                 </option>
                 <option v-for="department in departments" :key="department.id" :value="department.id">
                     {{ department.name }}
+                </option>
+            </select>
+
+            <!-- Форма обучения -->
+            <select v-model="selectEducationForm" :disabled="!selectedDepartment || loading"
+                class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none">
+                <option value="" disabled>
+                    {{ educationForms.length ? 'Выберите форму обучения' : 'Нет доступных форм обучения' }}
+                </option>
+                <option v-for="forms in educationForms" :key="forms.id" :value="forms.id">
+                    {{ forms.name }}
                 </option>
             </select>
 
@@ -42,6 +53,11 @@
                 <option value="3">3</option>
                 <option value="4">4</option>
             </select>
+
+            <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
+                type="email" placeholder="Id vk" v-model="vk">
+            <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
+                type="email" placeholder="Id telegram*" v-model="telegram">
         </div>
         <!-- src/widgets/StudentСard.vue -->
         <div class="flex flex-col gap-y-4 mt-4">
@@ -58,36 +74,42 @@
 
 <script setup>
 import { ref, onMounted, computed, watchEffect, watch } from 'vue';
-import { getUniversities, getFaculties, getDepartments } from '@/global/api';
+import { getUniversities, getFaculties, getDepartments, getEducationForms } from '@/global/api';
 import { useAuthStore } from '@/stores/auth';
 import LoadingFilesForRegistration from '@/ui/LoadingFilesForRegistration.vue';
 
 const universities = ref([]);
 const faculties = ref([]);
 const departments = ref([]);
+const educationForms = ref([]);
 const course = ref('');
+const vk = ref('');
+const telegram = ref('');
 const selectedUniversity = ref('');
 const selectedFaculty = ref('');
 const selectedDepartment = ref('');
+const selectEducationForm = ref('');
 const loading = ref(false);
 const authStore = useAuthStore();
 const emit = defineEmits(['update:isValid']);
 
-watch([selectedUniversity, selectedFaculty, selectedDepartment, course], () => {
+watch([selectedUniversity, selectedFaculty, selectedDepartment, course, vk, telegram], () => {
     authStore.data.profile.university = selectedUniversity.value;
     authStore.data.profile.faculty = selectedFaculty.value;
     authStore.data.profile.department = selectedDepartment.value;
-    authStore.data.profile.form_of_study = 1;
-    authStore.data.profile.vk_profile = '@test';
-    authStore.data.profile.telegram_username = '@test';
-    authStore.data.profile.disciplines = [1];
+    authStore.data.profile.form_of_study = course.value;
+    authStore.data.profile.vk_profile = vk.value;
+    authStore.data.profile.telegram_username = telegram.value;
+    authStore.data.profile.disciplines = [selectEducationForm.value];
 });
 
 const isFormValid = computed(() => {
     return selectedUniversity.value &&
         selectedFaculty.value &&
         selectedDepartment.value &&
-        course.value;
+        selectEducationForm.value &&
+        course.value &&
+        telegram.value;
 });
 
 watchEffect(() => {
@@ -137,7 +159,22 @@ const fetchDepartments = async () => {
     }
 }
 
+const fetchEducationForms = async () => {
+    if (!selectedDepartment.value) return;
+
+    loading.value = true;
+    try {
+        const response = await getEducationForms();
+        educationForms.value = response.results || [];
+    } catch (error) {
+        console.error('Ошибка получения факультетов:', error);
+        educationForms.value = [];
+    } finally {
+        loading.value = false;
+    }
+}
+
 watch(isFormValid, (newVal) => {
-    emit('update:isValid', Boolean(newVal)); // Явное преобразование в boolean
+    emit('update:isValid', Boolean(newVal));
 });
 </script>

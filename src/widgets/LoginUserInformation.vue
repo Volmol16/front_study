@@ -9,7 +9,7 @@
                 type="password" placeholder="Пароль" v-model="authStore.data.user.password">
         </div>
         <button class="mt-5 w-full py-3 bg-black text-white rounded-lg text-xl font-medium leading-7"
-            @click="authStore.login">Войти</button>
+            @click="handleLogin">Войти</button>
         <div class="flex flex-col gap-y-4">
             <ForgotThePassword :typeAuth="typeAuth" @toggle-auth="$emit('toggle-auth')" />
             <button class="text-[#8C8C8E] text-xl font-medium">Забили пароль?</button>
@@ -20,13 +20,28 @@
 <script setup>
 import ForgotThePassword from '@/ui/ForgotThePassword.vue';
 import { useAuthStore } from '@/stores/auth';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const emit = defineEmits(['toggle-auth']);
 const authStore = useAuthStore()
 
-const props = defineProps({
-    typeAuth: {
-        type: Boolean,
+const handleLogin = async () => {
+    try {
+        const result = await authStore.login();
+        if (result.success) {
+            authStore.checkAuth()
+            router.push({ name: 'home' })
+        } else {
+            console.error(result.message);
+        }
+    } catch (error) {
     }
-})
+
+    const props = defineProps({
+        typeAuth: {
+            type: Boolean,
+        }
+    })
+}
 </script>
