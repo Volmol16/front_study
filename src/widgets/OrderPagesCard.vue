@@ -21,7 +21,6 @@
 import OrderPagesCardDates from './OrderPagesCardDates.vue';
 import ProfileForCard from '@/ui/ProfileForCard.vue';
 import LineHR from '@/ui/LineHR.vue';
-import { defineProps } from 'vue';
 
 const props = defineProps({
     card: {

@@ -4,11 +4,12 @@
         <h2 class="text-[36px] font-semibold">С возвращением!</h2>
         <div class="flex flex-col gap-y-4 mt-6">
             <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
-                type="text" placeholder="Логин*">
+                type="text" placeholder="Логин*" v-model="authStore.data.user.username">
             <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
-                type="password" placeholder="Пароль">
+                type="password" placeholder="Пароль" v-model="authStore.data.user.password">
         </div>
-        <button class="mt-5 w-full py-3 bg-black text-white rounded-lg text-xl font-medium leading-7">Войти</button>
+        <button class="mt-5 w-full py-3 bg-black text-white rounded-lg text-xl font-medium leading-7"
+            @click="authStore.login">Войти</button>
         <div class="flex flex-col gap-y-4">
             <ForgotThePassword :typeAuth="typeAuth" @toggle-auth="$emit('toggle-auth')" />
             <button class="text-[#8C8C8E] text-xl font-medium">Забили пароль?</button>
@@ -18,8 +19,10 @@
 
 <script setup>
 import ForgotThePassword from '@/ui/ForgotThePassword.vue';
+import { useAuthStore } from '@/stores/auth';
 
 const emit = defineEmits(['toggle-auth']);
+const authStore = useAuthStore()
 
 const props = defineProps({
     typeAuth: {

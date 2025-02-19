@@ -20,7 +20,12 @@ import Header from './widgets/TheHeader.vue';
 import Footer from './widgets/TheFooter.vue';
 import RegisterPages from './pages/RegisterPages.vue';
 import { useAuthStore } from './stores/auth';
+import { onMounted } from 'vue';
 
 const authStore = useAuthStore();
+
+onMounted(() => {
+    authStore.checkAuth();
+});
 
 </script>
