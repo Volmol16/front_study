@@ -14,7 +14,7 @@ export const useAuthStore = defineStore("auth", {
         last_name: "",
         email: "",
         password: "",
-        role: "заказчик",
+        role: "исполнитель",
       },
       profile: {
         university: null,
