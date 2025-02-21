@@ -1,3 +1,4 @@
+<!-- src/components/AdminTable.vue -->
 <template>
     <div class="mt-10">
         <h2 class="text-black text-2xl font-semibold">Список заявок</h2>
@@ -21,29 +22,54 @@
         <div>
             <TheModalUser v-if="showModal" :user="selectedUser" @close-modal="closeModal" />
         </div>
-        <RouterView @open-modal="openModal" />
+        <RouterView @open-modal="handleOpenModel" />
     </div>
 </template>
 
 <script setup>
 import { useUserStore } from '@/stores';
-import { useRoute } from 'vue-router';
-import { ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { ref, onMounted, watch } from 'vue';
 import TheFilter from '@/widgets/TheFilter.vue';
 import TheModalUser from '@/widgets/TheModalUser.vue';
+import { useStudentCardStore } from '@/stores/StudentCard';
 
 const route = useRoute();
+const router = useRouter();
 const userStore = useUserStore();
-const selectedUser = ref(null);
+const studentCardStore = useStudentCardStore();
+const selectedUser = ref([]);
 const showModal = ref(false);
+const isLoading = ref(true);
 
-const openModal = (user) => {
-    selectedUser.value = user;
-    showModal.value = true;
-};
+watch(() => route.query.userId, (newId) => {
+    if (newId) {
+        const user = studentCardStore.studentCard.results?.find(
+            u => u.id === parseInt(newId)
+        );
+        if (user) {
+            selectedUser.value = user;
+            showModal.value = true;
+        }
+    } else {
+        showModal.value = false;
+    }
+})
+
+const handleOpenModel = (user) => {
+    router.push({
+        query: { ...route.query, userId: user.id }
+    })
+}
 
 const closeModal = () => {
-    showModal.value = false;
-    selectedUser.value = null;
-};
+    const query = { ...route.query };
+    delete query.userId;
+    router.replace({ query });
+}
+
+onMounted(async () => {
+    await studentCardStore.getStudentCard();
+    isLoading.value = false;
+})
 </script>

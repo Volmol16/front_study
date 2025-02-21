@@ -3,9 +3,9 @@
     <div class="p-4 pb-8 bg-[#8C8C8E14] rounded-2xl">
         <img :src="statusLogo" alt="Status">
         <div class="flex flex-col items-center mt-10 px-6">
-            <img :src="user.image" alt="Logo">
-            <h1 class="mt-2 text-2xl font-semibold">{{ user.name }}</h1>
-            <p class="mt-1 text-[#8C8C8E]">{{ user.jobTitle }}</p>
+            <img src="/image/avatar/LogoUser.png" alt="Logo">
+            <h1 class="mt-2 text-2xl font-semibold">{{ user.user.first_name + ' ' + user.user.last_name }}</h1>
+            <!-- <p class="mt-1 text-[#8C8C8E]">{{ user.jobTitle }}</p> -->
             <button @click="$emit('open-modal', user)" class="mt-14 px-8 py-3 bg-black rounded-lg text-white">
                 Просмотреть заявку
             </button>

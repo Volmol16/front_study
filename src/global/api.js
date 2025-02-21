@@ -23,3 +23,18 @@ export const getEducationForms = async () => {
   const response = await fetch(`${API_BASE_URL}/api/auth/education-forms/`);
   return await response.json();
 };
+
+export const getUniversitiesForStudentCard = async (id) => {
+  const response = await fetch(`${API_BASE_URL}/api/auth/universities/${id}/`);
+  return await response.json();
+};
+
+export const getFacultiesForStudentCard = async (id) => {
+  const response = await fetch(`${API_BASE_URL}/api/auth/faculties/${id}/`);
+  return await response.json();
+};
+
+export const getDepartmentsForStudentCard = async (id) => {
+  const response = await fetch(`${API_BASE_URL}/api/auth/departments/${id}/`);
+  return await response.json();
+};

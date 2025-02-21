@@ -1,5 +1,6 @@
 <!-- src/components/Alllist.vue -->
 <template>
+    <div v-if="isLoading">Загрузка...</div>
     <div class="grid grid-cols-4 gap-8">
         <CardUser v-for="user in users" :key="user.id" :user="user" @open-modal="openModal(user)" />
     </div>
@@ -7,14 +8,23 @@
 
 <script setup>
 import CardUser from '@/widgets/TheCardUser.vue';
-import { useUserStore } from '@/stores';
+import { useStudentCardStore } from '@/stores/StudentCard';
+import { onMounted, ref } from 'vue';
 
-const userStore = useUserStore();
-const users = userStore.listUsers;
+const studentCardStore = useStudentCardStore();
+const users = ref([]);
+const isLoading = ref(true);
+
 
 const emit = defineEmits(['open-modal']);
 
 const openModal = (user) => {
     emit('open-modal', user);
 };
+
+onMounted(async () => {
+    await studentCardStore.getStudentCard();
+    users.value = studentCardStore.studentCard.results || [];
+    isLoading.value = false;
+})
 </script>
