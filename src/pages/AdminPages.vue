@@ -5,5 +5,5 @@
 </template>
 
 <script setup>
-import AdminTable from '@/components/AdminTable.vue';
+import AdminTable from '@/components/admin/AdminTable.vue';
 </script>

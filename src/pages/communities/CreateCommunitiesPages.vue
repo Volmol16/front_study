@@ -13,5 +13,5 @@
 
 <script setup>
 import CreateCommunitiesForm from '@/components/CreateCommunitiesForm.vue';
-import UploadPhotoCommunity from '@/widgets/UploadPhotoCommunity.vue';
+import UploadPhotoCommunity from '@/widgets/auth/UploadPhotoCommunity.vue';
 </script>

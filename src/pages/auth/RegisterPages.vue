@@ -8,11 +8,11 @@
 </template>
 
 <script setup>
-import RegisterForm from '@/components/RegisterForm.vue';
-import AuthorizationForm from '@/components/AuthorizationForm.vue';
+import RegisterForm from '@/components/auth/RegisterForm.vue';
+import AuthorizationForm from '@/components/auth/AuthorizationForm.vue';
 import { ref } from 'vue';
 
-const typeAuth = ref(false);
+const typeAuth = ref(true);
 
 const toggleAuth = () => {
     typeAuth.value = !typeAuth.value;

@@ -12,8 +12,10 @@
                 :class="route.path === '/communities' ? 'text-[#8C8C8E]' : ''">Сообщество</router-link>
             <router-link class="uppercase" to="/auction"
                 :class="route.path === '/auction' ? 'text-[#8C8C8E]' : ''">Аукцион</router-link>
-            <router-link class="uppercase" to="/adminPanel"
-                :class="route.path === '/adminPanel' ? 'text-[#8C8C8E]' : ''">Admin</router-link>
+            <router-link v-if="['администратор', 'проверяющий'].includes(authStore.userRole)" class="uppercase"
+                to="/adminPanel" :class="route.path === '/adminPanel' ? 'text-[#8C8C8E]' : ''">
+                Admin
+            </router-link>
         </div>
     </div>
 </template>

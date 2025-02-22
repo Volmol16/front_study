@@ -6,6 +6,6 @@
 </template>
 
 <script setup>
-import NotCommunity from '@/widgets/NotCommunity.vue';
-import CommunitiesHeader from '@/widgets/CommunitiesHeader.vue';
+import NotCommunity from '@/widgets/communities/NotCommunity.vue';
+import CommunitiesHeader from '@/widgets/communities/CommunitiesHeader.vue';
 </script>

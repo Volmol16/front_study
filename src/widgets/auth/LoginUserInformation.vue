@@ -26,6 +26,12 @@ const router = useRouter();
 const emit = defineEmits(['toggle-auth']);
 const authStore = useAuthStore()
 
+defineProps({
+    typeAuth: {
+        type: Boolean,
+    }
+})
+
 const handleLogin = async () => {
     try {
         const result = await authStore.login();
@@ -38,10 +44,6 @@ const handleLogin = async () => {
     } catch (error) {
     }
 
-    const props = defineProps({
-        typeAuth: {
-            type: Boolean,
-        }
-    })
+
 }
 </script>

@@ -26,9 +26,9 @@
 </template>
 
 <script setup>
-import UserInformation from '@/widgets/UserInformation.vue';
-import StudentСard from '@/widgets/StudentСard.vue';
-import RegistrationSummary from '@/widgets/RegistrationSummary.vue';
+import UserInformation from '@/widgets/auth/UserInformation.vue';
+import StudentСard from '@/widgets/auth/StudentСard.vue';
+import RegistrationSummary from '@/widgets/auth/RegistrationSummary.vue';
 import CountPageRegister from '@/widgets/CountPageRegister.vue';
 import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue';

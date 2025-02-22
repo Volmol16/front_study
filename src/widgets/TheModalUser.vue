@@ -54,13 +54,17 @@
             <LineHR />
             <div class="px-4">
                 <h3 class="text-[#8C8C8E] text-xl">Дисциплины</h3>
-                <p class="mt-5">Дисциплины, которые я решаю:</p>
-                <!-- <p v-for="discipline in user.Disciplines" :key="discipline.id">{{ discipline.name }}</p> -->
+                <div>
+                    <p class="mt-5">Дисциплины, которые я решаю:</p>
+                    <p>
+                        - {{ disciplines?.name || 'Не указаны' }}
+                    </p>
+                </div>
             </div>
             <LineHR />
             <div class="px-4">
                 <h3 class="text-[#8C8C8E] text-xl">О себе</h3>
-                <!-- <p class="mt-5 text-lg leading-6">{{ user.description }}</p> -->
+                <p class="mt-5 text-lg leading-6">{{ user.about_self }}</p>
             </div>
             <LineHR />
             <div class="px-4">
@@ -79,7 +83,7 @@
 
 <script setup>
 import LineHR from '@/ui/LineHR.vue';
-import { getUniversitiesForStudentCard, getFacultiesForStudentCard, getDepartmentsForStudentCard } from '@/global/api';
+import { getUniversitiesForStudentCard, getFacultiesForStudentCard, getDepartmentsForStudentCard, getDisciplinesForStudentCard } from '@/global/api';
 import { onMounted, ref } from 'vue';
 
 
@@ -92,20 +96,33 @@ const props = defineProps({
 const university = ref({ name: '' });
 const faculty = ref({ name: '' });
 const department = ref({ name: '' });
+const disciplines = ref({ name: '' });
 const emit = defineEmits(['close-modal']);
 
 const fetchData = async () => {
     try {
-
-        const universitys = await getUniversitiesForStudentCard(props.user.profile.university);
-        const facultys = await getFacultiesForStudentCard(props.user.profile.faculty);
-        const departments = await getDepartmentsForStudentCard(props.user.profile.department);
-        university.value = universitys;
-        faculty.value = facultys;
-        department.value = departments;
+        if (props.user.profile.university) {
+            const universityData = await getUniversitiesForStudentCard(props.user.profile.university);
+            university.value = universityData;
+        }
+        if (props.user.profile.faculty) {
+            const facultyData = await getFacultiesForStudentCard(props.user.profile.faculty);
+            faculty.value = facultyData;
+        }
+        if (props.user.profile.department) {
+            const departmentData = await getDepartmentsForStudentCard(props.user.profile.department);
+            department.value = departmentData;
+        }
+        if (props.user.profile.disciplines?.length) {
+            const disciplinesData = await getDisciplinesForStudentCard(props.user.profile.disciplines);
+            disciplines.value = disciplinesData;
+        }
     } catch (error) {
-        console.error("Ошибка загрузки данные:", error);
-        university.value = { name: 'Не удалось загрузить' };
+        console.error('Ошибка получения данных:', error);
+        university.value = { name: 'Не указан' };
+        faculty.value = { name: 'Не указан' };
+        department.value = { name: 'Не указан' };
+        disciplines.value = [];
     }
 }
 

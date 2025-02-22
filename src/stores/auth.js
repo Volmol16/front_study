@@ -6,6 +6,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const useAuthStore = defineStore("auth", {
   state: () => ({
     isAuth: false,
+    userRole: null,
     isRegistered: false,
     data: {
       user: {
@@ -74,8 +75,11 @@ export const useAuthStore = defineStore("auth", {
         );
 
         sessionStorage.setItem("access_token", response.data.access_token);
+        sessionStorage.setItem("user", response.data.user.role);
 
         this.isAuth = true;
+        this.userRole = response.data.user.role;
+        console.log(this.userRole);
 
         return { success: true, data: response.data };
       } catch (error) {
@@ -91,6 +95,8 @@ export const useAuthStore = defineStore("auth", {
     // метод для проверки аутентификации
     checkAuth() {
       const token = sessionStorage.getItem("access_token");
+      const role = sessionStorage.getItem("user");
+      this.userRole = role;
       this.isAuth = !!token;
       return this.isAuth;
     },
@@ -98,6 +104,8 @@ export const useAuthStore = defineStore("auth", {
     // Метод для выхода
     logout() {
       sessionStorage.removeItem("access_token");
+      sessionStorage.removeItem("user");
+      this.userRole = null;
       this.isAuth = false;
     },
   },

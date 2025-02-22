@@ -38,3 +38,8 @@ export const getDepartmentsForStudentCard = async (id) => {
   const response = await fetch(`${API_BASE_URL}/api/auth/departments/${id}/`);
   return await response.json();
 };
+
+export const getDisciplinesForStudentCard = async (id) => {
+  const response = await fetch(`${API_BASE_URL}/api/auth/discipline/${id}/`);
+  return await response.json();
+};

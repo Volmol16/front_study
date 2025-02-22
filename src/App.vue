@@ -21,8 +21,8 @@
 <script setup>
 import Header from './widgets/TheHeader.vue';
 import Footer from './widgets/TheFooter.vue';
-import RegisterPages from './pages/RegisterPages.vue';
-import RegistrySuccessfulPages from './pages/RegistrySuccessfulPages.vue';
+import RegisterPages from './pages/auth/RegisterPages.vue';
+import RegistrySuccessfulPages from './pages/auth/RegistrySuccessfulPages.vue';
 import { useAuthStore } from './stores/auth';
 import { onMounted } from 'vue';
 

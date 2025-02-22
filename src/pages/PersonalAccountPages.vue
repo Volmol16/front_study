@@ -8,6 +8,6 @@
 
 <script setup>
 import HeaderPersonalAccount from '@/components/HeaderPersonalAccount.vue';
-import ChartCommunity from '@/widgets/ChartCommunity.vue';
-import ChartAuction from '@/widgets/ChartAuction.vue';
+import ChartCommunity from '@/widgets/chart/ChartCommunity.vue';
+import ChartAuction from '@/widgets/auction/ChartAuction.vue';
 </script>

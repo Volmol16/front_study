@@ -6,8 +6,8 @@
 </template>
 
 <script setup>
-import CommunitiesHeader from '@/widgets/CommunitiesHeader.vue';
-import CommunitiesCard from '@/widgets/CommunitiesCard.vue';
+import CommunitiesHeader from '@/widgets/communities/CommunitiesHeader.vue';
+import CommunitiesCard from '@/widgets/communities/CommunitiesCard.vue';
 import { useUserStore } from '@/stores';
 
 const useStore = useUserStore();
