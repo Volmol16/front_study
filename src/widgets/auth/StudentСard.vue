@@ -60,11 +60,11 @@
                 type="email" placeholder="Id telegram*" v-model="telegram">
         </div>
         <!-- src/widgets/StudentСard.vue -->
-        <div class="flex flex-col gap-y-4 mt-4">
+        <!-- <div class="flex flex-col gap-y-4 mt-4">
             <LoadingFilesForRegistration>
                 <h4>Прикрепите фото студенческого билета</h4>
             </LoadingFilesForRegistration>
-        </div>
+        </div> -->
         <div>
             <ForgotThePassword @toggle-auth="$emit('toggle-auth')" :typeAuth="typeAuth" />
         </div>

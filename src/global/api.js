@@ -12,15 +12,18 @@ export const getFaculties = async (universityId) => {
   return await response.json();
 };
 
-export const getDepartments = async (facultyId) => {
-  const response = await fetch(
-    `${API_BASE_URL}/api/auth/departments/?faculty_id=${facultyId}`
-  );
+export const getDepartments = async () => {
+  const response = await fetch(`${API_BASE_URL}/api/auth/departments/`);
   return await response.json();
 };
 
 export const getEducationForms = async () => {
   const response = await fetch(`${API_BASE_URL}/api/auth/education-forms/`);
+  return await response.json();
+};
+
+export const getDisciplines = async () => {
+  const response = await fetch(`${API_BASE_URL}/api/auth/discipline/`);
   return await response.json();
 };
 

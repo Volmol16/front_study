@@ -1,4 +1,3 @@
-<!-- src/components/RegisterForm.vue -->
 <template>
     <div class="flex justify-between items-center min-h-screen">
         <img src="/image/auth/Group 67.png" alt="Group">
@@ -10,7 +9,7 @@
                     <CountPageRegister :countPages="countPages" />
                     <component :typeAuth="typeAuth" @toggle-auth="$emit('toggle-auth')" class="mt-8"
                         :is="currentComponent" @next-step="nextPage" @prev-step="prevStep"
-                        @update:isValid="isValid = $event" />
+                        @update:isValid="isValid = $event" @file-selected="handleFileSelected" />
                 </div>
                 <div class="flex justify-end gap-x-4 mt-8">
                     <button class="px-8 py-3 bg-white text-black rounded-lg text-xl font-medium leading-7"
@@ -65,8 +64,11 @@ const currentComponent = computed(() => {
 const handleClick = async () => {
     if (countPages.value === 3) {
         try {
-            await authStore.register(); // Выполняем регистрацию
-            router.push({ name: 'register-success' }); // Переходим на страницу успеха
+            await authStore.register();
+
+            await authStore.postPhoto();
+
+            router.push({ name: 'register-success' });
         } catch (error) {
             console.error("Ошибка регистрации:", error);
         }
@@ -75,22 +77,19 @@ const handleClick = async () => {
     }
 };
 
-
-
-
+const handleFileSelected = (file) => {
+    authStore.setStudentCardPhoto(file);
+};
 
 const nextPage = () => {
     if (countPages.value < 3) {
         countPages.value++;
     }
-    // isValid.value = false; // УДАЛИТЕ ЭТУ СТРОКУ
 };
-
 
 const prevStep = () => {
     if (countPages.value > 1) {
         countPages.value--;
     }
 };
-
 </script>
