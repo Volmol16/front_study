@@ -16,14 +16,15 @@
             <LineHR />
             <div class="px-4 mt-3">
                 <div class="flex">
-                    <div class="w-[224px] flex flex-col gap-y-6 text-lg text-[#8C8C8E]">
-                        <p>Логин:</p>
-                        <p>Email:</p>
-                        <p v-if="user.profile.vk_profile !== '' || user.profile.telegram_username !== ''">Соц.сети</p>
-                    </div>
-                    <div class="flex flex-col gap-y-6 font-medium">
-                        <span>{{ user.user.username }}</span>
-                        <span>{{ user.user.email }}</span>
+                    <div class="grid grid-cols-[auto_1fr] items-start gap-x-10 gap-y-3 mt-7">
+                        <p class="text-[#8C8C8E] text-lg">Логин:</p>
+                        <p class="text-black font-medium break-words">{{ user.user.username }}</p>
+
+                        <p class="text-[#8C8C8E] text-lg">Email:</p>
+                        <p class="text-black font-medium break-words">{{ user.user.email }}</p>
+
+                        <p class="text-[#8C8C8E] text-lg"
+                            v-if="user.profile.vk_profile !== '' || user.profile.telegram_username !== ''">Соц.сети:</p>
                         <div class="flex gap-4"
                             v-if="user.profile.vk_profile !== '' && user.profile.telegram_username !== ''">
                             <a v-if="user.profile.vk_profile !== ''" :href="normalizeVkUrl(user.profile.vk_profile)"
@@ -34,6 +35,7 @@
                                 rel="noopener noreferrer"><img src="/image/modal/telegram.svg" alt="">
                             </a>
                         </div>
+
                     </div>
                 </div>
                 <LineHR />

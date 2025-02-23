@@ -15,7 +15,10 @@
 
 <script setup>
 import { computed } from 'vue';
+import { useStudentCardStore } from '@/stores/StudentCard';
 
+
+const studentCardStore = useStudentCardStore();
 const emit = defineEmits(['open-modal'])
 const props = defineProps({
     user: {
@@ -24,13 +27,20 @@ const props = defineProps({
     }
 })
 
+
 const statusLogo = computed(() => {
-    switch (props.user.state) {
-        case 'Accepted':
+    if (!studentCardStore.studentCard.results) {
+        return '/image/state/Unreviewed.svg';
+    }
+
+    const status = studentCardStore.studentCard.results.find(user => user.id === props.user.id).status;
+
+    switch (status) {
+        case 'Принят':
             return '/image/state/Accepted.svg';
         case 'rejected':
             return '/image/state/Rejected.svg';
-        case 'postponed':
+        case 'На проверке':
             return '/image/state/Postponed.svg';
         default:
             return '/image/state/Unreviewed.svg';

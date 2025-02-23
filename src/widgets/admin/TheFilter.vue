@@ -30,11 +30,13 @@
 
 <script setup>
 import { useUserStore } from '@/stores';
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
+import { useStudentCardStore } from '@/stores/StudentCard';
+import UserLogo from '@/widgets/UserLogo.vue';
 
 const userStore = useUserStore();
-const users = userStore.listUsers
-import UserLogo from './UserLogo.vue';
+const studentCardStore = useStudentCardStore();
+const users = studentCardStore.studentCard.results;
 
 const displayedUsers = computed(() => {
     return users.slice(0, 5)
@@ -43,4 +45,8 @@ const displayedUsers = computed(() => {
 const remainingUsers = computed(() => {
     return users.length - 5 > 0 ? users.length - 5 : 0;
 })
+
+onMounted(async () => {
+    await studentCardStore.getStudentCard();
+});
 </script>

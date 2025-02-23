@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import CardUser from '@/widgets/TheCardUser.vue';
+import CardUser from '@/widgets/admin/TheCardUser.vue';
 import { useStudentCardStore } from '@/stores/StudentCard';
 import { onMounted, ref } from 'vue';
 
