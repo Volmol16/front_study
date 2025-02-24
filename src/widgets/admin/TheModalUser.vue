@@ -69,14 +69,28 @@
                 <p class="mt-5 text-lg leading-6">{{ user.about_self }}</p>
             </div>
             <LineHR />
-            <div class="px-4">
+            <div class="flex flex-col justify-between gap-y-4 px-4">
+                <div class="flex items-center gap-x-4">
+                    <input class="w-full py-2.5 px-6 text-[#8C8C8E] bg-[#E9E9EB] border border-[#8C8C8E] rounded-lg"
+                        type="text" placeholder="Напишите сообщение" v-model="comment">
+                    <button @click="statusСhecks('Отправлен на доработку')" class="px-6 py-3 bg-black rounded-lg"><img
+                            src="/image/modal/Stop_Sign.svg"></button>
+                </div>
+                <div class="flex items-center gap-x-4">
+                    <input class="w-full py-2.5 px-6 text-[#8C8C8E] bg-[#E9E9EB] border border-[#8C8C8E] rounded-lg"
+                        type="text" placeholder="Введите номер студенческого билета" v-model="student_card_number">
+                    <button @click="statusСhecks('Принять')" class="px-6 py-3 bg-white rounded-lg"><img
+                            src="/image/modal/Circle_Check.svg"></button>
+                </div>
+            </div>
+            <!-- <div class="px-4">
                 <div class="flex justify-between gap-x-4">
                     <button class="w-full py-3 bg-white rounded-lg text-xl font-medium text-black">Одобрить</button>
                     <button class="w-full py-3 bg-black rounded-lg text-xl font-medium text-white">Отказ</button>
                 </div>
                 <button class="w-full py-3 bg-[#8C8C8E] rounded-lg text-xl font-medium text-white mt-4">Запросить доп
                     информацию</button>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -95,6 +109,8 @@ import {
 import { onMounted, ref } from 'vue';
 
 
+const comment = ref('');
+const student_card_number = ref('');
 const props = defineProps({
     user: {
         type: Object,
@@ -107,9 +123,10 @@ const department = ref({ name: '' });
 const disciplines = ref({ name: '' });
 const emit = defineEmits(['close-modal']);
 
-const statusСhecks = async () => {
-    const response = await postQuestionnaireAuditing(props.user.id);
+const statusСhecks = async (accept) => {
+    await postQuestionnaireAuditing(props.user.id, accept, student_card_number.value, comment.value);
 }
+
 
 const fetchData = async () => {
     try {

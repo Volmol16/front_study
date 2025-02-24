@@ -126,12 +126,25 @@ const router = createRouter({
           component: () => import("@/components/admin/Alllist.vue"),
         },
         {
-          path: "postponed",
-          component: () => import("@/components/admin/PostponedList.vue"),
+          path: "accepted",
+          component: () => import("@/components/admin/AcceptedList.vue"),
         },
         {
-          path: "new",
-          component: () => import("@/components/admin/NewList.vue"),
+          path: "rejectedSb",
+          component: () => import("@/components/admin/RejectedbySBList.vue"),
+        },
+        {
+          path: "check",
+          component: () => import("@/components/admin/AtTheCheckList.vue"),
+        },
+        {
+          path: "refinement",
+          component: () => import("@/components/admin/ForRefinementList.vue"),
+        },
+        {
+          path: "performerRejected",
+          component: () =>
+            import("@/components/admin/PerformerRejectedList.vue"),
         },
       ],
     },

@@ -19,7 +19,6 @@ export const useStudentCardStore = defineStore("studentCard", {
           }
         );
         this.studentCard = response.data;
-        console.log(this.studentCard.results);
       } catch (error) {
         console.error("Ошибка при получении карточки студента:", error);
       }

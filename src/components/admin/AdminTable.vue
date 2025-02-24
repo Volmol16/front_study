@@ -2,19 +2,32 @@
 <template>
     <div class="mt-10">
         <h2 class="text-black text-2xl font-semibold">Список заявок</h2>
-        <div class="mt-5">
+        <div class="flex justify-between items-center mt-5">
             <ul class="flex gap-x-6 text-xl">
                 <li><router-link class="space-x-4 pb-2 px-3"
                         :class="route.path === '/adminPanel/all' ? 'border-b-2 border-[#8C8C8E]' : ''"
                         to="/adminPanel/all">Все <span class="px-4 py-1 bg-black text-white rounded-2xl text-sm">{{
                             studentCardStore.studentCard.count }}</span></router-link></li>
                 <li><router-link class="pb-2 px-3"
-                        :class="route.path === '/adminPanel/postponed' ? 'border-b-2 border-[#8C8C8E]' : ''"
-                        to="/adminPanel/postponed">Отложенные</router-link></li>
+                        :class="route.path === '/adminPanel/accepted' ? 'border-b-2 border-[#8C8C8E]' : ''"
+                        to="/adminPanel/accepted">Приняты</router-link></li>
                 <li><router-link class="pb-2 px-3"
-                        :class="route.path === '/adminPanel/new' ? 'border-b-2 border-[#8C8C8E]' : ''"
-                        to="/adminPanel/new">Новые</router-link></li>
+                        :class="route.path === '/adminPanel/rejectedSb' ? 'border-b-2 border-[#8C8C8E]' : ''"
+                        to="/adminPanel/rejectedSb">Отклонены по СБ</router-link></li>
+                <li><router-link class="pb-2 px-3"
+                        :class="route.path === '/adminPanel/check' ? 'border-b-2 border-[#8C8C8E]' : ''"
+                        to="/adminPanel/check">На проверке</router-link></li>
+                <li><router-link class="pb-2 px-3"
+                        :class="route.path === '/adminPanel/refinement' ? 'border-b-2 border-[#8C8C8E]' : ''"
+                        to="/adminPanel/refinement">На доработке</router-link></li>
+                <li><router-link class="pb-2 px-3"
+                        :class="route.path === '/adminPanel/performerRejected' ? 'border-b-2 border-[#8C8C8E]' : ''"
+                        to="/adminPanel/performerRejected">Отклонен исполнитель</router-link></li>
             </ul>
+            <div class="flex gap-x-3">
+                <button class="px-3 py-2 bg-[#D9D9D9] rounded-2xl">Исполнитель</button>
+                <button class="px-3 py-2 bg-[#D9D9D9] rounded-2xl">Заказчик</button>
+            </div>
         </div>
         <div class="my-7">
             <!-- <TheFilter /> -->

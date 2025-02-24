@@ -54,13 +54,23 @@ export const postQuestionnaireAuditing = async (
   comment
 ) => {
   const response = await fetch(
-    `${API_BASE_URL}/api/auth/student-card-verification/${id}/?status=${status}&student_card_number=${card_number}&comment=${comment}`,
+    `${API_BASE_URL}/api/auth/student-card-verification/${id}/`,
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        status: status,
+        student_card_number: card_number,
+        comment: comment,
+      }),
     }
   );
+
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+
   return await response.json();
 };

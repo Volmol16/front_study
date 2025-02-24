@@ -1,8 +1,9 @@
 <!-- src/components/Alllist.vue -->
 <template>
     <div v-if="isLoading">Загрузка...</div>
-    <div class="grid grid-cols-4 gap-8">
-        <CardUser v-for="user in users" :key="user.id" :user="user" @open-modal="openModal(user)" />
+    <div class="grid grid-cols-6 gap-7">
+        <CardUser @click="openModal(user)" v-for="user in users" :key="user.id" :user="user"
+            @open-modal="openModal(user)" />
     </div>
 </template>
 
