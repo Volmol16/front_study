@@ -85,7 +85,13 @@
 
 <script setup>
 import LineHR from '@/ui/LineHR.vue';
-import { getUniversitiesForStudentCard, getFacultiesForStudentCard, getDepartmentsForStudentCard, getDisciplinesForStudentCard } from '@/global/api';
+import {
+    getUniversitiesForStudentCard,
+    getFacultiesForStudentCard,
+    getDepartmentsForStudentCard,
+    getDisciplinesForStudentCard,
+    postQuestionnaireAuditing
+} from '@/global/api';
 import { onMounted, ref } from 'vue';
 
 
@@ -100,6 +106,10 @@ const faculty = ref({ name: '' });
 const department = ref({ name: '' });
 const disciplines = ref({ name: '' });
 const emit = defineEmits(['close-modal']);
+
+const statusСhecks = async () => {
+    const response = await postQuestionnaireAuditing(props.user.id);
+}
 
 const fetchData = async () => {
     try {

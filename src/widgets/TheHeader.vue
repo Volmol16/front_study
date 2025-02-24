@@ -16,6 +16,7 @@
                 to="/adminPanel" :class="route.path === '/adminPanel' ? 'text-[#8C8C8E]' : ''">
                 Admin
             </router-link>
+            <button @click="authStore.logout">Выход</button>
         </div>
     </div>
 </template>
@@ -23,6 +24,7 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
+
 
 const route = useRoute();
 const authStore = useAuthStore();

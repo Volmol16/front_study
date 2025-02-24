@@ -34,7 +34,6 @@ export const useAuthStore = defineStore("auth", {
     },
   }),
   actions: {
-    // Первый этап регистрации
     async register() {
       try {
         const response = await axios.post(
@@ -46,8 +45,8 @@ export const useAuthStore = defineStore("auth", {
         );
 
         this.isRegistered = true;
-        this.userId = response.data.user_id; // Сохраняем user_id
-        this.profileId = response.data.profile_id; // Сохраняем profile_id
+        this.userId = response.data.user_id;
+        this.profileId = response.data.profile_id;
         return response.data;
       } catch (error) {
         console.error("Ошибка регистрации:", {
@@ -59,7 +58,6 @@ export const useAuthStore = defineStore("auth", {
       }
     },
 
-    // Второй этап регистрации (загрузка файла и дополнительной информации)
     async postPhoto() {
       if (!this.userId || !this.profileId) {
         throw new Error("User ID или Profile ID отсутствуют");
@@ -113,7 +111,6 @@ export const useAuthStore = defineStore("auth", {
 
         this.isAuth = true;
         this.userRole = response.data.user.role;
-        console.log(this.userRole);
 
         return { success: true, data: response.data };
       } catch (error) {

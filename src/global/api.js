@@ -46,3 +46,21 @@ export const getDisciplinesForStudentCard = async (id) => {
   const response = await fetch(`${API_BASE_URL}/api/auth/discipline/${id}/`);
   return await response.json();
 };
+
+export const postQuestionnaireAuditing = async (
+  id,
+  status,
+  card_number,
+  comment
+) => {
+  const response = await fetch(
+    `${API_BASE_URL}/api/auth/student-card-verification/${id}/?status=${status}&student_card_number=${card_number}&comment=${comment}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return await response.json();
+};

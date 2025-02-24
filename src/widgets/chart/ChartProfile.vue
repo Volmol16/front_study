@@ -6,7 +6,8 @@
                 <p class="flex gap-x-1">8,4 <img src="/image/works/star.svg" alt="star"></p>
             </div>
         </div>
-        <h3 class="text-center text-2xl font-semibold mt-3.5">Алексей Чацкий</h3>
+        <h3 class="text-center text-2xl font-semibold mt-3.5">{{ user[0].user.first_name + ' ' + user[0].user.last_name
+            || 'Не указан' }}</h3>
         <div class="flex justify-center items-center gap-x-2 mt-2">
             <span v-for="card in work" :key="card.id" class="px-4 py-1 text-sm bg-[#AFB9BB] rounded-2xl text-black">{{
                 card.meaning }}</span>
@@ -25,6 +26,16 @@
 </template>
 
 <script setup>
+import { useUserProfileStore } from '@/stores/UserProfile';
+import { onMounted, computed } from 'vue';
+
+const useProfile = useUserProfileStore();
+const user = computed(() => useProfile.profile);
+
+onMounted(() => {
+    useProfile.getProfile();
+});
+
 const work = [
     {
         id: 1,
