@@ -8,7 +8,7 @@
 
 <script setup>
 import CommunitiesHeader from '@/widgets/communities/CommunitiesHeader.vue';
-import CommunitiesDetailedCard from '@/widgets/communities/CommunitiesDetailedCard.vue';
+import CommunitiesDetailedCard from '@/widgets/communities/card/CommunitiesDetailedCard.vue';
 import { useUserStore } from '@/stores';
 import { ref, onMounted } from 'vue';
 

@@ -120,32 +120,35 @@ const router = createRouter({
       children: [
         {
           path: "",
-          component: () => import("@/components/admin/Alllist.vue"),
+          component: () => import("@/components/admin/pages/Alllist.vue"),
         },
         {
           path: "all",
-          component: () => import("@/components/admin/Alllist.vue"),
+          component: () => import("@/components/admin/pages/Alllist.vue"),
         },
         {
           path: "accepted",
-          component: () => import("@/components/admin/AcceptedList.vue"),
+          component: () => import("@/components/admin/pages/AcceptedList.vue"),
         },
         {
           path: "rejectedSb",
-          component: () => import("@/components/admin/RejectedbySBList.vue"),
+          component: () =>
+            import("@/components/admin/pages/RejectedbySBList.vue"),
         },
         {
           path: "check",
-          component: () => import("@/components/admin/AtTheCheckList.vue"),
+          component: () =>
+            import("@/components/admin/pages/AtTheCheckList.vue"),
         },
         {
           path: "refinement",
-          component: () => import("@/components/admin/ForRefinementList.vue"),
+          component: () =>
+            import("@/components/admin/pages/ForRefinementList.vue"),
         },
         {
           path: "performerRejected",
           component: () =>
-            import("@/components/admin/PerformerRejectedList.vue"),
+            import("@/components/admin/pages/PerformerRejectedList.vue"),
         },
       ],
     },
