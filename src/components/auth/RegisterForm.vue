@@ -28,7 +28,7 @@
 import UserInformation from '@/widgets/auth/UserInformation.vue';
 import StudentСard from '@/widgets/auth/StudentСard.vue';
 import RegistrationSummary from '@/widgets/auth/RegistrationSummary.vue';
-import CountPageRegister from '@/widgets/CountPageRegister.vue';
+import CountPageRegister from '@/ui/CountPageRegister.vue';
 import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue';
 import { computed } from 'vue';

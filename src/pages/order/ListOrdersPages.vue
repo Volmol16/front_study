@@ -16,8 +16,8 @@
 </template>
 
 <script setup>
-import ListOrdersHeader from '@/components/ListOrdersHeader.vue';
-import TheCardListOrder from '@/widgets/TheCardListOrder.vue';
+import ListOrdersHeader from '@/components/opder/ListOrdersHeader.vue';
+import TheCardListOrder from '@/widgets/order/TheCardListOrder.vue';
 import { useUserStore } from '@/stores';
 import { ref } from 'vue';
 

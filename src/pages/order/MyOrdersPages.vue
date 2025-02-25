@@ -12,8 +12,8 @@
 </template>
 
 <script setup>
-import TheCardWorks from '@/widgets/TheCardWorks.vue';
-import MyOrdersHeader from '@/components/MyOrdersHeader.vue';
+import TheCardWorks from '@/widgets/sign-in/TheCardWorks.vue';
+import MyOrdersHeader from '@/components/opder/MyOrdersHeader.vue';
 import { useUserStore } from '@/stores';
 import { computed, ref } from 'vue';
 

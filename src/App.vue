@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import Header from './widgets/TheHeader.vue';
+import Header from './shared/TheHeader.vue';
 import Footer from './widgets/TheFooter.vue';
 import RegisterPages from './pages/auth/RegisterPages.vue';
 import RegistrySuccessfulPages from './pages/auth/RegistrySuccessfulPages.vue';

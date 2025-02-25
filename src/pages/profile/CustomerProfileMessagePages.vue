@@ -5,5 +5,5 @@
 </template>
 
 <script setup>
-import CustomerProfileMessageBody from '@/components/СustomerProfileMessageBody.vue';
+import CustomerProfileMessageBody from '@/components/profile/СustomerProfileMessageBody.vue';
 </script>

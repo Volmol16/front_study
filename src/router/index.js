@@ -13,16 +13,16 @@ const router = createRouter({
     },
     {
       path: "/myBegunOrder",
-      component: () => import("@/pages/MyOrdersPages.vue"),
+      component: () => import("@/pages/order/MyOrdersPages.vue"),
     },
     {
       path: "/listOrders",
-      component: () => import("@/pages/ListOrdersPages.vue"),
+      component: () => import("@/pages/order/ListOrdersPages.vue"),
     },
     {
       name: "Account",
       path: "/account",
-      component: () => import("@/pages/PersonalAccountPages.vue"),
+      component: () => import("@/pages/profile/PersonalAccountPages.vue"),
     },
     {
       name: "communities",
@@ -66,12 +66,12 @@ const router = createRouter({
     {
       path: "/404",
       name: "404",
-      component: () => import("@/pages/ForbiddenPages.vue"),
+      component: () => import("@/pages/sign-in/ForbiddenPages.vue"),
     },
     {
       name: "orderPage",
       path: "/orderPage/:id",
-      component: () => import("@/pages/OrderPages.vue"),
+      component: () => import("@/pages/order/OrderPages.vue"),
       props: true,
       children: [
         {
@@ -98,23 +98,24 @@ const router = createRouter({
     {
       name: "myReviews",
       path: "/myReviews",
-      component: () => import("@/pages/MyReviewsPages.vue"),
+      component: () => import("@/pages/order/MyReviewsPages.vue"),
     },
     {
       name: "customerProfile",
       path: "/customerProfile/:id",
-      component: () => import("@/pages/CustomerProfilePages.vue"),
+      component: () => import("@/pages/profile/CustomerProfilePages.vue"),
       props: true,
     },
     {
       name: "customerProfile-messages",
       path: "/messages/:id",
-      component: () => import("@/pages/CustomerProfileMessagePages.vue"),
+      component: () =>
+        import("@/pages/profile/CustomerProfileMessagePages.vue"),
       props: true,
     },
     {
       path: "/adminPanel",
-      component: () => import("@/pages/AdminPages.vue"),
+      component: () => import("@/pages/admin/AdminPages.vue"),
       meta: { requiresAdmin: true },
       children: [
         {

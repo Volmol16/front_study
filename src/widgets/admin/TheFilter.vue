@@ -32,7 +32,7 @@
 import { useUserStore } from '@/stores';
 import { computed, onMounted } from 'vue';
 import { useStudentCardStore } from '@/stores/StudentCard';
-import UserLogo from '@/widgets/UserLogo.vue';
+import UserLogo from '@/ui/UserLogo.vue';
 
 const userStore = useUserStore();
 const studentCardStore = useStudentCardStore();
