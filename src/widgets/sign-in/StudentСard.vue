@@ -74,7 +74,7 @@
 
 <script setup>
 import { ref, onMounted, computed, watchEffect, watch } from 'vue';
-import { getUniversities, getFaculties, getDepartments, getEducationForms } from '@/global/api';
+import { getUniversities, getFaculties, getDepartments, getEducationForms } from '@/app/global/api';
 import { useAuthStore } from '@/stores/auth';
 import LoadingFilesForRegistration from '@/ui/LoadingFilesForRegistration.vue';
 

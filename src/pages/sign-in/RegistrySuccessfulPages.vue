@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col items-center justify-center min-h-screen">
-        <h1 class="text-4xl font-semibold mb-4">Регистрация успешно завершена!</h1>
-        <p class="text-lg mb-8">Теперь вы можете войти в систему, используя свои учетные данные.</p>
+        <h1 class="text-4xl font-semibold mb-4">🎉 Регистрация завершена!</h1>
+        <p class="text-lg mb-8">Вы успешно отправили анкету!</p>
         <button class="px-8 py-3 bg-black text-white rounded-lg text-xl font-medium" @click="goToLogin">
             Перейти к входу
         </button>

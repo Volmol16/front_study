@@ -19,8 +19,8 @@
 </template>
 
 <script setup>
-import Header from '@/shared/TheHeader.vue';
-import Footer from '@/shared/TheFooter.vue';
+import Header from '@/widgets/TheHeader.vue';
+import Footer from '@/widgets/TheFooter.vue';
 import RegisterPages from '@/pages/sign-in/RegisterPages.vue';
 import RegistrySuccessfulPages from '@/pages/sign-in/RegistrySuccessfulPages.vue';
 import { useAuthStore } from './stores/auth';

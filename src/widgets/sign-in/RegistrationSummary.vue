@@ -27,7 +27,7 @@
 <script setup>
 import LoadingFilesForRegistration from '@/ui/LoadingFilesForRegistration.vue';
 import { useAuthStore } from '@/stores/auth';
-import { getDepartments } from '@/global/api';
+import { getDepartments } from '@/app/global/api';
 import { onMounted, ref, watch } from 'vue';
 
 

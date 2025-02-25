@@ -105,7 +105,7 @@ import {
     getDepartmentsForStudentCard,
     getDisciplinesForStudentCard,
     postQuestionnaireAuditing
-} from '@/global/api';
+} from '@/app/global/api';
 import { onMounted, ref } from 'vue';
 
 
@@ -123,8 +123,8 @@ const department = ref({ name: '' });
 const disciplines = ref({ name: '' });
 const emit = defineEmits(['close-modal']);
 
-const statusСhecks = async (accept) => {
-    await postQuestionnaireAuditing(props.user.id, accept, student_card_number.value, comment.value);
+const statusСhecks = async (status) => {
+    await postQuestionnaireAuditing(props.user.id, status, student_card_number.value, comment.value);
 }
 
 
