@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import userDataService from "@/services/userDataService";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
@@ -36,18 +37,11 @@ export const useAuthStore = defineStore("auth", {
   actions: {
     async register() {
       try {
-        const response = await axios.post(
-          `${API_BASE_URL}/api/auth/register/`,
-          this.data,
-          {
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-
-        this.isRegistered = true;
-        this.userId = response.data.user_id;
-        this.profileId = response.data.profile_id;
-        return response.data;
+        await userDataService.register(this.data).then((response) => {
+          this.isRegistered = true;
+          this.userId = response.data.user_id;
+          this.profileId = response.data.profile_id;
+        });
       } catch (error) {
         console.error("Ошибка регистрации:", {
           status: error.response?.status,
@@ -98,19 +92,18 @@ export const useAuthStore = defineStore("auth", {
       };
 
       try {
-        const response = await axios.post(
-          `${API_BASE_URL}/api/auth/login/`,
-          data,
-          {
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-
-        sessionStorage.setItem("access_token", response.data.access_token);
-        sessionStorage.setItem("user", response.data.user.role);
-
-        this.isAuth = true;
-        this.userRole = response.data.user.role;
+        await userDataService
+          .login(data)
+          .then((response) => {
+            const data = response.data;
+            sessionStorage.setItem("access_token", response.data.access_token);
+            sessionStorage.setItem("user", response.data.user.role);
+            this.isAuth = true;
+            this.userRole = response.data.user.role;
+          })
+          .catch((e) => {
+            console.log(e);
+          });
 
         return { success: true, data: response.data };
       } catch (error) {
