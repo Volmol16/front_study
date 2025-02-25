@@ -8,8 +8,8 @@
 </template>
 
 <script setup>
-import RegisterForm from '@/components/auth/RegisterForm.vue';
-import AuthorizationForm from '@/components/auth/AuthorizationForm.vue';
+import RegisterForm from '@/components/sign-in/RegisterForm.vue';
+import AuthorizationForm from '@/components/sign-in/AuthorizationForm.vue';
 import { ref } from 'vue';
 
 const typeAuth = ref(true);

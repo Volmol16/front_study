@@ -48,19 +48,19 @@ const router = createRouter({
     {
       name: "register",
       path: "/register",
-      component: () => import("@/pages/auth/RegisterPages.vue"),
+      component: () => import("@/pages/sign-in/RegisterPages.vue"),
       meta: { requiresGuest: true },
     },
     {
       name: "login",
       path: "/login",
-      component: () => import("@/components/auth/AuthorizationForm.vue"),
+      component: () => import("@/components/sign-in/AuthorizationForm.vue"),
       meta: { requiresGuest: true },
     },
     {
       path: "/register-success",
       name: "register-success",
-      component: () => import("@/pages/auth/RegistrySuccessfulPages.vue"),
+      component: () => import("@/pages/sign-in/RegistrySuccessfulPages.vue"),
       meta: { requiresRegistration: true },
     },
     {
