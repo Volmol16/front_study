@@ -42,9 +42,9 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
 import { ref, onMounted, watch } from 'vue';
-import TheFilter from '@/widgets/admin/TheFilter.vue';
-import TheModalUser from '@/widgets/admin/TheModalUser.vue';
-import { useStudentCardStore } from '@/stores/StudentCard';
+import TheFilter from '@/components/admin/TheFilter.vue';
+import TheModalUser from '@/components/admin/TheModalUser.vue';
+import { useStudentCardStore } from '@/stores/useStudentCardStore';
 
 const route = useRoute();
 const router = useRouter();

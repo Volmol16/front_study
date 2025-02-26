@@ -1,6 +1,6 @@
 // src/router/index.js
 import { createRouter, createWebHistory } from "vue-router";
-import { useAuthStore } from "@/stores/auth";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -54,7 +54,8 @@ const router = createRouter({
     {
       name: "login",
       path: "/login",
-      component: () => import("@/components/sign-in/AuthorizationForm.vue"),
+      component: () =>
+        import("@/components/sign-in/login/AuthorizationForm.vue"),
       meta: { requiresGuest: true },
     },
     {

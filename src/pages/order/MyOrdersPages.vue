@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import TheCardWorks from '@/widgets/sign-in/TheCardWorks.vue';
+import TheCardWorks from '@/components/profile/TheCardWorks.vue';
 import MyOrdersHeader from '@/components/opder/MyOrdersHeader.vue';
 import { useUserStore } from '@/stores';
 import { computed, ref } from 'vue';

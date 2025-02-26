@@ -157,12 +157,14 @@ const fetchData = async () => {
 
 
 const normalizeVkUrl = (url) => {
+    if (!url) return '';
     if (url.startsWith('http')) return url;
     if (url.startsWith('@')) return `https://vk.com/${url.slice(1)}`;
     return `https://vk.com/${url}`;
 }
 
 const normalizeTelegramUrl = (url) => {
+    if (!url) return '';
     if (url.startsWith('http')) return url;
     if (url.startsWith('@')) return `https://t.me/${url.slice(1)}`;
     return `https://t.me/${url}`;

@@ -9,8 +9,6 @@
             <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
                 type="text" placeholder="Имя*" v-model="auth.last_name">
             <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
-                type="text" placeholder="Отчество" v-model="auth.patronymic">
-            <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
                 type="email" placeholder="Email*" v-model="auth.email">
             <!-- <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
                 type="text" placeholder="Id vk\telegram*" v-model="auth.socialId"> -->
@@ -34,7 +32,7 @@
 </template>
 
 <script setup>
-import { useAuthStore } from '@/stores/auth';
+import { useAuthStore } from '@/stores/useAuthStore';
 import { computed, watchEffect, ref, watch } from 'vue';
 import BoxingCheckForReg from '@/ui/BoxingCheckForReg.vue';
 import ForgotThePassword from '@/ui/ForgotThePassword.vue';
@@ -46,6 +44,7 @@ const isDataLoaded = ref(false);
 const passwordRepeat = ref('');
 const isAgreementChecked = ref(false);
 const isPrivacyPolicyChecked = ref(false);
+
 
 const props = defineProps({
     typeAuth: {
@@ -77,6 +76,6 @@ watchEffect(() => {
     }
 });
 watch(isFormValid, (newVal) => {
-    emit('update:isValid', Boolean(newVal)); // Явное преобразование в boolean
+    emit('update:isValid', Boolean(newVal));
 });
 </script>

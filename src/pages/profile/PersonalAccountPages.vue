@@ -8,9 +8,9 @@
 
 <script setup>
 import HeaderPersonalAccount from '@/components/profile/HeaderPersonalAccount.vue';
-import ChartCommunity from '@/widgets/chart/ChartCommunity.vue';
-import ChartAuction from '@/widgets/auction/ChartAuction.vue';
-import { useUserProfileStore } from '@/stores/UserProfile';
+import ChartCommunity from '@/components/chart/ChartCommunity.vue';
+import ChartAuction from '@/components/auction/ChartAuction.vue';
+import { useUserProfileStore } from '@/stores/useUserProfileStore';
 import { onMounted } from 'vue';
 
 const useProfile = useUserProfileStore();

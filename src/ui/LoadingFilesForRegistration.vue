@@ -17,7 +17,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useAuthStore } from '@/stores/auth';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 const authStore = useAuthStore();
 const fileInput = ref(null);

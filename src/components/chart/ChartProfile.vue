@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import { useUserProfileStore } from '@/stores/UserProfile';
+import { useUserProfileStore } from '@/stores/useUserProfileStore';
 import { onMounted, computed } from 'vue';
 
 const useProfile = useUserProfileStore();
@@ -35,6 +35,7 @@ const user = computed(() => useProfile.profile);
 onMounted(() => {
     useProfile.getProfile();
 });
+
 
 const work = [
     {

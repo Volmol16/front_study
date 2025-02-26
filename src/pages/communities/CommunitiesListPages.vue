@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import CommunitiesHeader from '@/widgets/communities/CommunitiesHeader.vue';
+import CommunitiesHeader from '@/components/communities/CommunitiesHeader.vue';
 import CommunitiesCard from '@/widgets/communities/card/CommunitiesCard.vue';
 import { useUserStore } from '@/stores';
 

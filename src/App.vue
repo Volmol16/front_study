@@ -23,7 +23,7 @@ import Header from '@/widgets/TheHeader.vue';
 import Footer from '@/widgets/TheFooter.vue';
 import RegisterPages from '@/pages/sign-in/RegisterPages.vue';
 import RegistrySuccessfulPages from '@/pages/sign-in/RegistrySuccessfulPages.vue';
-import { useAuthStore } from './stores/auth';
+import { useAuthStore } from './stores/useAuthStore';
 import { onMounted } from 'vue';
 
 const authStore = useAuthStore();

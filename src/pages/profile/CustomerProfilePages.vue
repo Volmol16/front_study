@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import CustomerProfileHeader from '@/widgets/sign-in/CustomerProfileHeader.vue';
+import CustomerProfileHeader from '@/components/profile/CustomerProfileHeader.vue';
 import Reviews from '@/ui/Reviews.vue';
 import { useUserStore } from '@/stores';
 import { ref, onMounted, computed } from 'vue';

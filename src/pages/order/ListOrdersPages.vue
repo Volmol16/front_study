@@ -17,7 +17,7 @@
 
 <script setup>
 import ListOrdersHeader from '@/components/opder/ListOrdersHeader.vue';
-import TheCardListOrder from '@/widgets/order/TheCardListOrder.vue';
+import TheCardListOrder from '@/components/opder/TheCardListOrder.vue';
 import { useUserStore } from '@/stores';
 import { ref } from 'vue';
 

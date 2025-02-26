@@ -19,7 +19,7 @@
 
 <script setup>
 import ForgotThePassword from '@/ui/ForgotThePassword.vue';
-import { useAuthStore } from '@/stores/auth';
+import { useAuthStore } from '@/stores/useAuthStore';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();

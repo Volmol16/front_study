@@ -23,7 +23,7 @@
 
 <script setup>
 import { useRoute } from 'vue-router';
-import { useAuthStore } from '@/stores/auth';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 
 const route = useRoute();

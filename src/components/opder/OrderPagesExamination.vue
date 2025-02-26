@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import ExaminationOrderHeader from '@/widgets/order/ExaminationOrderHeader.vue';
+import ExaminationOrderHeader from '@/components/opder/ExaminationOrderHeader.vue';
 import { ref } from 'vue';
 
 const input = ref({

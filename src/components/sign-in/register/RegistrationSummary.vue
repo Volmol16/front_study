@@ -1,3 +1,4 @@
+<!-- src/components/sign-in/register/RegistrationSummary.vue -->
 <template>
     <div>
         <div class="flex flex-col gap-y-4">
@@ -26,14 +27,15 @@
 
 <script setup>
 import LoadingFilesForRegistration from '@/ui/LoadingFilesForRegistration.vue';
-import { useAuthStore } from '@/stores/auth';
-import { getDepartments } from '@/app/global/api';
-import { onMounted, ref, watch } from 'vue';
+import { useAuthStore } from '@/stores/useAuthStore';
+import { computed, onMounted, ref, watch } from 'vue';
+import UserDataService from "@/services/UserDataService";
 
 
 const authStore = useAuthStore();
 const descipline = ref([])
 const selectDicsipline = ref('')
+const selectedDepartment = computed(() => authStore.selectedDepartment)
 const emit = defineEmits(['update:isValid']);
 
 watch([selectDicsipline], () => {
@@ -46,8 +48,9 @@ const isFormValid = () => {
 
 const fetchDiscipline = async () => {
     try {
-        const response = await getDepartments();
-        descipline.value = response.results || [];
+        await UserDataService.getDisciplines(selectedDepartment.value).then((response) => {
+            descipline.value = response.data.results || [];
+        });
     } catch (error) {
         console.error('Ошибка загрузки дисциплин:', error);
         descipline.value = [];

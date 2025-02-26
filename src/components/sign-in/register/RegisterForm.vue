@@ -25,13 +25,12 @@
 </template>
 
 <script setup>
-import UserInformation from '@/widgets/sign-in/UserInformation.vue';
-import StudentСard from '@/widgets/sign-in/StudentСard.vue';
-import RegistrationSummary from '@/widgets/sign-in/RegistrationSummary.vue';
+import UserInformation from '@/components/sign-in/register/UserInformation.vue';
+import StudentСard from '@/components/sign-in/register/StudentСard.vue';
+import RegistrationSummary from '@/components/sign-in/register/RegistrationSummary.vue';
 import CountPageRegister from '@/ui/CountPageRegister.vue';
-import { useAuthStore } from '@/stores/auth';
-import { ref } from 'vue';
-import { computed } from 'vue';
+import { useAuthStore } from '@/stores/useAuthStore';
+import { onMounted, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
@@ -92,4 +91,8 @@ const prevStep = () => {
         countPages.value--;
     }
 };
+
+onMounted(() => {
+    authStore.referralCode()
+}) 
 </script>

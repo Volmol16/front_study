@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import LoginUserInformation from '@/widgets/sign-in/LoginUserInformation.vue';
+import LoginUserInformation from '@/components/sign-in/login/LoginUserInformation.vue';
 
 const emit = defineEmits(['toggle-auth']);
 

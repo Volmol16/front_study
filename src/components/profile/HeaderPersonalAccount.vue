@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import ChartEarningsMonth from '@/widgets/chart/ChartEarningsMonth.vue';
-import ChartEarningsAll from '@/widgets/chart/ChartEarningsAll.vue';
-import ChartProfile from '@/widgets/chart/ChartProfile.vue';
+import ChartEarningsMonth from '@/components/chart/ChartEarningsMonth.vue';
+import ChartEarningsAll from '@/components/chart/ChartEarningsAll.vue';
+import ChartProfile from '@/components/chart/ChartProfile.vue';
 </script>

@@ -31,7 +31,7 @@
 <script setup>
 import { useUserStore } from '@/stores';
 import { computed, onMounted } from 'vue';
-import { useStudentCardStore } from '@/stores/StudentCard';
+import { useStudentCardStore } from '@/stores/useStudentCardStore';
 import UserLogo from '@/ui/UserLogo.vue';
 
 const userStore = useUserStore();

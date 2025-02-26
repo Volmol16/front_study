@@ -10,7 +10,7 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { useUserStore } from '@/stores';
-import OrderPagesCard from '@/widgets/order/OrderPagesCard.vue'
+import OrderPagesCard from '@/components/opder/OrderPagesCard.vue'
 
 const props = defineProps({
     id: {

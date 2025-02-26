@@ -1,3 +1,4 @@
+<!-- src/components/sign-in/register/StudentСard.vue -->
 <template>
     <div>
 
@@ -74,8 +75,9 @@
 
 <script setup>
 import { ref, onMounted, computed, watchEffect, watch } from 'vue';
-import { getUniversities, getFaculties, getDepartments, getEducationForms } from '@/app/global/api';
-import { useAuthStore } from '@/stores/auth';
+import { useAuthStore } from '@/stores/useAuthStore';
+import { useRegistrationStore } from '@/stores/useRegistrationStore';
+import UserDataService from "@/services/UserDataService";
 import LoadingFilesForRegistration from '@/ui/LoadingFilesForRegistration.vue';
 
 const universities = ref([]);
@@ -91,17 +93,8 @@ const selectedDepartment = ref('');
 const selectEducationForm = ref('');
 const loading = ref(false);
 const authStore = useAuthStore();
+const registrationStore = useRegistrationStore();
 const emit = defineEmits(['update:isValid']);
-
-watch([selectedUniversity, selectedFaculty, selectedDepartment, course, vk, telegram], () => {
-    authStore.data.profile.university = selectedUniversity.value;
-    authStore.data.profile.faculty = selectedFaculty.value;
-    authStore.data.profile.department = selectedDepartment.value;
-    authStore.data.profile.form_of_study = course.value;
-    authStore.data.profile.vk_profile = vk.value;
-    authStore.data.profile.telegram_username = telegram.value;
-    authStore.data.profile.disciplines = [selectEducationForm.value];
-});
 
 const isFormValid = computed(() => {
     return selectedUniversity.value &&
@@ -119,8 +112,9 @@ watchEffect(() => {
 onMounted(async () => {
     loading.value = true;
     try {
-        const response = await getUniversities();
-        universities.value = response.results || [];
+        await UserDataService.getUniversities().then((response) => {
+            universities.value = response.data.results || [];
+        })
     } catch (error) {
         console.error("Ошибка при загрузке университетов:", error);
     } finally {
@@ -133,8 +127,9 @@ const fetchFaculties = async () => {
 
     loading.value = true;
     try {
-        const response = await getFaculties(selectedUniversity.value);
-        faculties.value = response.results || [];
+        await UserDataService.getFaculties(selectedUniversity.value).then((response) => {
+            faculties.value = response.data.results || [];
+        })
     } catch (error) {
         console.error('Ошибка получения факультетов:', error);
         faculties.value = [];
@@ -149,8 +144,9 @@ const fetchDepartments = async () => {
 
     loading.value = true;
     try {
-        const response = await getDepartments(selectedFaculty.value);
-        departments.value = response.results || [];
+        await UserDataService.getDepartments(selectedFaculty.value).then((response) => {
+            departments.value = response.data.results || [];
+        })
     } catch (error) {
         console.error('Ошибка получения факультетов:', error);
         departments.value = [];
@@ -164,8 +160,9 @@ const fetchEducationForms = async () => {
 
     loading.value = true;
     try {
-        const response = await getEducationForms();
-        educationForms.value = response.results || [];
+        await UserDataService.getEducationForms(selectedDepartment.value).then((response) => {
+            educationForms.value = response.data.results || [];
+        })
     } catch (error) {
         console.error('Ошибка получения факультетов:', error);
         educationForms.value = [];
@@ -173,6 +170,25 @@ const fetchEducationForms = async () => {
         loading.value = false;
     }
 }
+
+watch([selectedUniversity, selectedFaculty, selectEducationForm, selectedDepartment, course, vk, telegram], () => {
+    authStore.setSelectedDepartment(selectedDepartment.value)
+    authStore.data.profile.university = selectedUniversity.value;
+    authStore.data.profile.faculty = selectedFaculty.value;
+    authStore.data.profile.department = selectedDepartment.value;
+    authStore.data.profile.form_of_study = selectEducationForm.value;
+    authStore.data.profile.course = course.value;
+    authStore.data.profile.vk_profile = vk.value;
+    authStore.data.profile.telegram_username = telegram.value;
+    // registrationStore.setSelectedUniversity();
+    // registrationStore.setSelectedFaculuty();
+    // registrationStore.setSelectedDepartment();
+    // registrationStore.setSelectedEducationForm();
+    // registrationStore.setSelectedCourse();
+    // registrationStore.setVkProfile();
+    // registrationStore.setTelegramUsername();
+});
+
 
 watch(isFormValid, (newVal) => {
     emit('update:isValid', Boolean(newVal));

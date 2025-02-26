@@ -8,8 +8,8 @@
 </template>
 
 <script setup>
-import CardUser from '@/widgets/admin/TheCardUser.vue';
-import { useStudentCardStore } from '@/stores/StudentCard';
+import CardUser from '@/components/admin/TheCardUser.vue';
+import { useStudentCardStore } from '@/stores/useStudentCardStore';
 import { onMounted, ref } from 'vue';
 
 const studentCardStore = useStudentCardStore();

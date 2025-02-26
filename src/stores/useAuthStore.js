@@ -1,7 +1,8 @@
 import { defineStore } from "pinia";
 import axios from "axios";
+import { useRoute } from "vue-router";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-import userDataService from "@/services/userDataService";
+import userDataService from "@/services/UserDataService";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
@@ -10,6 +11,7 @@ export const useAuthStore = defineStore("auth", {
     userId: null,
     profileId: null,
     isRegistered: false,
+    selectedDepartment: null,
     data: {
       user: {
         username: "",
@@ -18,6 +20,7 @@ export const useAuthStore = defineStore("auth", {
         email: "",
         password: "",
         role: "исполнитель",
+        referral_code: "",
       },
       profile: {
         university: null,
@@ -35,6 +38,18 @@ export const useAuthStore = defineStore("auth", {
     },
   }),
   actions: {
+    async referralCode() {
+      const route = useRoute();
+      const referralCode = route.query.referral_code;
+      if (referralCode) {
+        await userDataService.referral_code(referralCode).then((response) => {
+          if (response.status === 200) {
+            this.data.user.referral_code = referralCode;
+          }
+        });
+      }
+    },
+
     async register() {
       try {
         await userDataService.register(this.data).then((response) => {
@@ -64,17 +79,7 @@ export const useAuthStore = defineStore("auth", {
       formData.append("about_self", this.data.student_card.about_self);
 
       try {
-        const response = await axios.post(
-          `${API_BASE_URL}/api/auth/registration/education-info/`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-
-        return response.data;
+        await userDataService.postPhoto(formData);
       } catch (error) {
         console.error("Ошибка загрузки фото:", {
           status: error.response?.status,
@@ -95,7 +100,6 @@ export const useAuthStore = defineStore("auth", {
         await userDataService
           .login(data)
           .then((response) => {
-            const data = response.data;
             sessionStorage.setItem("access_token", response.data.access_token);
             sessionStorage.setItem("user", response.data.user.role);
             this.isAuth = true;
@@ -139,6 +143,10 @@ export const useAuthStore = defineStore("auth", {
 
     setStudentCardPhoto(file) {
       this.data.student_card.photo = file;
+    },
+
+    setSelectedDepartment(department) {
+      this.selectedDepartment = department;
     },
   },
 });

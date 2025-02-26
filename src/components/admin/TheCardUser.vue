@@ -22,7 +22,7 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useStudentCardStore } from '@/stores/StudentCard';
+import { useStudentCardStore } from '@/stores/useStudentCardStore';
 
 
 const studentCardStore = useStudentCardStore();
