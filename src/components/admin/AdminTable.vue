@@ -33,7 +33,8 @@
             <!-- <TheFilter /> -->
         </div>
         <div>
-            <TheModalUser v-if="showModal" :user="selectedUser" @close-modal="closeModal" />
+            <TheModalUser v-if="showModal" :user="selectedUser" @close-modal="closeModal"
+                @update-data="handleUpdateData" />
         </div>
         <RouterView @open-modal="handleOpenModel" />
     </div>
@@ -66,6 +67,11 @@ watch(() => route.query.userId, (newId) => {
         showModal.value = false;
     }
 })
+
+const handleUpdateData = async () => {
+    await studentCardStore.getStudentCard();
+    isLoading.value = false;
+}
 
 const handleOpenModel = (user) => {
     router.push({

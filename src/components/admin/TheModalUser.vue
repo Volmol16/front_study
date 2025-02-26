@@ -70,17 +70,19 @@
             </div>
             <LineHR />
             <div class="flex flex-col justify-between gap-y-4 px-4">
+                <p v-if="isSuccessfully" class="text-center text-green-500 font-semibold">Успешно</p>
                 <div class="flex items-center gap-x-4">
                     <input class="w-full py-2.5 px-6 text-[#8C8C8E] bg-[#E9E9EB] border border-[#8C8C8E] rounded-lg"
                         type="text" placeholder="Напишите сообщение" v-model="comment">
-                    <button @click="statusСhecks('Отправлен на доработку')" class="px-6 py-3 bg-black rounded-lg"><img
-                            src="/image/modal/Stop_Sign.svg"></button>
+                    <button @click="questionnaireRefusal('Отправлен на доработку')"
+                        class="px-6 py-3 bg-black rounded-lg"><img src="/image/modal/Stop_Sign.svg"
+                            :disabled="!comment"></button>
                 </div>
                 <div class="flex items-center gap-x-4">
                     <input class="w-full py-2.5 px-6 text-[#8C8C8E] bg-[#E9E9EB] border border-[#8C8C8E] rounded-lg"
                         type="text" placeholder="Введите номер студенческого билета" v-model="student_card_number">
-                    <button @click="statusСhecks('Принять')" class="px-6 py-3 bg-white rounded-lg"><img
-                            src="/image/modal/Circle_Check.svg"></button>
+                    <button @click="questionnaireAccepted('Принят')" class="px-6 py-3 bg-white rounded-lg"
+                        :disabled="!student_card_number"><img src="/image/modal/Circle_Check.svg"></button>
                 </div>
             </div>
             <!-- <div class="px-4">
@@ -99,52 +101,69 @@
 
 <script setup>
 import LineHR from '@/ui/LineHR.vue';
-import {
-    getUniversitiesForStudentCard,
-    getFacultiesForStudentCard,
-    getDepartmentsForStudentCard,
-    getDisciplinesForStudentCard,
-    postQuestionnaireAuditing
-} from '@/app/global/api';
 import { onMounted, ref } from 'vue';
+import AdminDataService from '@/services/AdminDataService';
+import { useStudentCardStore } from '@/stores/useStudentCardStore';
 
 
 const comment = ref('');
 const student_card_number = ref('');
+const isSuccessfully = ref(false);
+const studentCardStore = useStudentCardStore();
+const university = ref({ name: '' });
+const faculty = ref({ name: '' });
+const department = ref({ name: '' });
+const disciplines = ref({ name: '' });
+
+const emit = defineEmits(['close-modal']);
+
 const props = defineProps({
     user: {
         type: Object,
         required: true,
     },
 });
-const university = ref({ name: '' });
-const faculty = ref({ name: '' });
-const department = ref({ name: '' });
-const disciplines = ref({ name: '' });
-const emit = defineEmits(['close-modal']);
 
-const statusСhecks = async (status) => {
-    await postQuestionnaireAuditing(props.user.id, status, student_card_number.value, comment.value);
+const questionnaireAccepted = async (status) => {
+    await AdminDataService.postQuestionnaireAccepted(props.user.id, student_card_number.value, status).then(() => {
+        isSuccessfully.value = true
+    })
+    await studentCardStore.getStudentCard();
+    emit('close-modal');
+    emit('update-data');
+}
+
+const questionnaireRefusal = async (status) => {
+    await AdminDataService.postQuestionnaireRefusal(props.user.id, comment.value, status).then(() => {
+        isSuccessfully.value = true
+    })
+    await studentCardStore.getStudentCard();
+    emit('close-modal');
+    emit('update-data');
 }
 
 
 const fetchData = async () => {
     try {
         if (props.user.profile.university) {
-            const universityData = await getUniversitiesForStudentCard(props.user.profile.university);
-            university.value = universityData;
+            await AdminDataService.getUniversities(props.user.profile.university).then((response) => {
+                university.value = response.data;
+            });
         }
         if (props.user.profile.faculty) {
-            const facultyData = await getFacultiesForStudentCard(props.user.profile.faculty);
-            faculty.value = facultyData;
+            await AdminDataService.getFaculties(props.user.profile.faculty).then((response) => {
+                faculty.value = response.data;
+            })
         }
         if (props.user.profile.department) {
-            const departmentData = await getDepartmentsForStudentCard(props.user.profile.department);
-            department.value = departmentData;
+            await AdminDataService.getDepartments(props.user.profile.department).then((response) => {
+                department.value = response.data;
+            })
         }
         if (props.user.profile.disciplines?.length) {
-            const disciplinesData = await getDisciplinesForStudentCard(props.user.profile.disciplines);
-            disciplines.value = disciplinesData;
+            await AdminDataService.getDisciplines(props.user.profile.disciplines).then((response) => {
+                disciplines.value = response.data;
+            })
         }
     } catch (error) {
         console.error('Ошибка получения данных:', error);

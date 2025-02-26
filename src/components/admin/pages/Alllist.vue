@@ -10,10 +10,12 @@
 <script setup>
 import CardUser from '@/components/admin/TheCardUser.vue';
 import { useStudentCardStore } from '@/stores/useStudentCardStore';
-import { onMounted, ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { computed, onMounted, ref } from 'vue';
 
 const studentCardStore = useStudentCardStore();
-const users = ref([]);
+const { studentCard } = storeToRefs(studentCardStore);
+const users = computed(() => studentCard.value.results || []);
 const isLoading = ref(true);
 
 
@@ -25,7 +27,6 @@ const openModal = (user) => {
 
 onMounted(async () => {
     await studentCardStore.getStudentCard();
-    users.value = studentCardStore.studentCard.results || [];
     isLoading.value = false;
 })
 </script>

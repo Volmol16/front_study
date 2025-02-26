@@ -3,6 +3,7 @@ import axios from "axios";
 import { useRoute } from "vue-router";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import userDataService from "@/services/UserDataService";
+import router from "@/app/router";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
@@ -20,7 +21,7 @@ export const useAuthStore = defineStore("auth", {
         email: "",
         password: "",
         role: "исполнитель",
-        referral_code: "",
+        // referral_code: "",
       },
       profile: {
         university: null,
@@ -104,6 +105,7 @@ export const useAuthStore = defineStore("auth", {
             sessionStorage.setItem("user", response.data.user.role);
             this.isAuth = true;
             this.userRole = response.data.user.role;
+            router.push({ name: "home" });
           })
           .catch((e) => {
             console.log(e);
@@ -133,6 +135,7 @@ export const useAuthStore = defineStore("auth", {
       sessionStorage.removeItem("user");
       this.userRole = null;
       this.isAuth = false;
+      router.push({ name: "login" });
     },
 
     resetRegistration() {

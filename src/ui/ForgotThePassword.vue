@@ -1,7 +1,7 @@
 <!-- src/ui/ForgotThePassword.vue -->
 <template>
     <div class="text-xl font-medium mt-5">
-        <button @click="$emit('toggle-auth')">{{ typeAuth ? 'Создать профиль' : 'Войти в аккаунт' }}</button>
+        <button @click="toggle">{{ typeAuth ? 'Создать профиль' : 'Войти в аккаунт' }}</button>
     </div>
 </template>
 
@@ -9,8 +9,13 @@
 const props = defineProps({
     typeAuth: {
         type: Boolean,
+        required: true,
     }
-})
+});
 
 const emit = defineEmits(['toggle-auth']);
+
+const toggle = () => {
+    emit('toggle-auth'); // Эмитим событие для переключения между авторизацией и регистрацией
+};
 </script>
