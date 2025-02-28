@@ -2,10 +2,10 @@
 <template>
     <div>
 
-        <div class="flex flex-col items-center gap-y-4">
+        <div class="grid grid-cols-2 gap-4">
             <!-- Университеты -->
             <select v-model="selectedUniversity" @change="fetchFaculties" :disabled="loading"
-                class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none">
+                class="col-span-2 px-6 py-3 bg-transparent border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none">
                 <option value="" disabled>Выберите вуз</option>
                 <option v-for="university in universities" :key="university.id" :value="university.id">
                     {{ university.name }}
@@ -14,7 +14,7 @@
 
             <!-- Факультеты -->
             <select v-model="selectedFaculty" @change="fetchDepartments" :disabled="!selectedUniversity || loading"
-                class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none">
+                class="col-span-2 px-6 py-3 bg-transparent border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none">
                 <option value="" disabled>
                     {{ faculties.length ? 'Выберите факультет' : 'Нет доступных факультетов' }}
                 </option>
@@ -25,7 +25,7 @@
 
             <!-- Кафедры -->
             <select v-model="selectedDepartment" @change="fetchEducationForms" :disabled="!selectedFaculty || loading"
-                class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none">
+                class="col-span-2 px-6 py-3 bg-transparent border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none">
                 <option value="" disabled>
                     {{ departments.length ? 'Выберите кафедру' : 'Нет доступных кафедр' }}
                 </option>
@@ -36,7 +36,7 @@
 
             <!-- Форма обучения -->
             <select v-model="selectEducationForm" :disabled="!selectedDepartment || loading"
-                class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none">
+                class="px-6 py-3 bg-transparent border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none">
                 <option value="" disabled>
                     {{ educationForms.length ? 'Выберите форму обучения' : 'Нет доступных форм обучения' }}
                 </option>
@@ -47,7 +47,7 @@
 
             <!-- Курс -->
             <select v-model="course" :disabled="!selectedDepartment || loading"
-                class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none">
+                class="px-6 py-3 bg-transparent border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none">
                 <option value="" disabled>{{ course.length ? 'Выберите курс' : 'Нет доступных курсов' }}</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -55,9 +55,11 @@
                 <option value="4">4</option>
             </select>
 
-            <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
+            <input
+                class="px-6 py-3 bg-transparent border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
                 type="email" placeholder="Id vk" v-model="vk">
-            <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
+            <input
+                class="px-6 py-3 bg-transparent border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
                 type="email" placeholder="Id telegram*" v-model="telegram">
         </div>
         <!-- src/widgets/StudentСard.vue -->

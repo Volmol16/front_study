@@ -1,9 +1,9 @@
 <template>
     <div class="flex gap-x-[72px]">
         <div v-for="page in 3" :key="page" class="relative">
-            <div class="flex justify-center items-center text-[40px] font-medium" :class="{
-                'text-black': page <= countPages,
-                'text-[#D9D9D9]': page > countPages,
+            <div class="flex justify-center items-center text-[40px] font-semibold" :class="{
+                'text-[#7B44F2]': page <= countPages,
+                'text-[#BFBFBF]': page > countPages,
             }">
                 0{{ page }}
             </div>

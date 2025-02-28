@@ -1,3 +1,4 @@
+// src/app/router/index.js
 import { createRouter, createWebHistory } from "vue-router";
 import { useAuthStore } from "@/stores/useAuthStore";
 
@@ -9,7 +10,8 @@ const authRoutes = [
       {
         name: "register",
         path: "register",
-        component: () => import("@/pages/sign-in/RegisterPages.vue"),
+        component: () =>
+          import("@/components/sign-in/register/RegisterForm.vue"),
         meta: { requiresGuest: true },
       },
       {
@@ -31,8 +33,7 @@ const authRoutes = [
 
 const adminRoutes = [
   {
-    path: "/adminPanel",
-    component: () => import("@/layout/DefaultLayout.vue"),
+    path: "adminPanel",
     meta: { requiresAdmin: true },
     children: [
       {
@@ -80,8 +81,7 @@ const adminRoutes = [
 
 const orderRoutes = [
   {
-    path: "/myBegunOrder",
-    component: () => import("@/layout/DefaultLayout.vue"),
+    path: "myBegunOrder",
     children: [
       {
         path: "",
@@ -91,7 +91,6 @@ const orderRoutes = [
   },
   {
     path: "/listOrders",
-    component: () => import("@/layout/DefaultLayout.vue"),
     children: [
       {
         path: "",
@@ -101,7 +100,6 @@ const orderRoutes = [
   },
   {
     path: "/orderPage/:id",
-    component: () => import("@/layout/DefaultLayout.vue"),
     children: [
       {
         name: "orderPage",
@@ -134,7 +132,6 @@ const orderRoutes = [
   },
   {
     path: "/myReviews",
-    component: () => import("@/layout/DefaultLayout.vue"),
     children: [
       {
         path: "",
@@ -147,7 +144,6 @@ const orderRoutes = [
 const profileRoutes = [
   {
     path: "/account",
-    component: () => import("@/layout/DefaultLayout.vue"),
     children: [
       {
         name: "Account",
@@ -158,7 +154,6 @@ const profileRoutes = [
   },
   {
     path: "/customerProfile/:id",
-    component: () => import("@/layout/DefaultLayout.vue"),
     children: [
       {
         name: "customerProfile",
@@ -170,7 +165,6 @@ const profileRoutes = [
   },
   {
     path: "/messages/:id",
-    component: () => import("@/layout/DefaultLayout.vue"),
     children: [
       {
         name: "customerProfile-messages",
@@ -186,7 +180,6 @@ const profileRoutes = [
 const communitiesRoutes = [
   {
     path: "/communities",
-    component: () => import("@/layout/DefaultLayout.vue"),
     children: [
       {
         name: "communities",
@@ -197,7 +190,6 @@ const communitiesRoutes = [
   },
   {
     path: "/communitiesCreate",
-    component: () => import("@/layout/DefaultLayout.vue"),
     children: [
       {
         name: "communities-create",
@@ -209,7 +201,6 @@ const communitiesRoutes = [
   },
   {
     path: "/communitiesList",
-    component: () => import("@/layout/DefaultLayout.vue"),
     children: [
       {
         name: "communities-list",
@@ -220,7 +211,6 @@ const communitiesRoutes = [
   },
   {
     path: "/communitiesPage/:id",
-    component: () => import("@/layout/DefaultLayout.vue"),
     children: [
       {
         name: "communities-page",

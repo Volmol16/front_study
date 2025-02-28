@@ -1,7 +1,7 @@
 <!-- src/components/sign-in/register/RegistrationSummary.vue -->
 <template>
     <div>
-        <div class="flex flex-col gap-y-4">
+        <div class="flex flex-col gap-y-4 mt-8">
             <select v-model="selectDicsipline"
                 class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none">
                 <option value="" disabled>

@@ -15,7 +15,4 @@ const props = defineProps({
 
 const emit = defineEmits(['toggle-auth']);
 
-const toggle = () => {
-    emit('toggle-auth'); // Эмитим событие для переключения между авторизацией и регистрацией
-};
 </script>

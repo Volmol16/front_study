@@ -11,7 +11,7 @@
         <button class="mt-5 w-full py-3 bg-black text-white rounded-lg text-xl font-medium leading-7"
             @click="handleLogin">Войти</button>
         <div class="flex flex-col gap-y-4">
-            <ForgotThePassword :typeAuth="typeAuth" @toggle-auth="$emit('toggle-auth')" />
+            <button @click="$router.push({ name: 'register' })">Зарегестрироваться</button>
             <button class="text-[#8C8C8E] text-xl font-medium">Забили пароль?</button>
         </div>
     </div>

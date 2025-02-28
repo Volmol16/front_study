@@ -1,8 +1,15 @@
+<!-- src/layout/DefaultLayout.vue -->
 <template>
     <div>
-        <main class="">
+        <header class="mb-10">
+            <Header />
+        </header>
+        <main class="mx-10">
             <RouterView />
         </main>
+        <footer class="mt-10">
+            <Footer />
+        </footer>
     </div>
 </template>
 

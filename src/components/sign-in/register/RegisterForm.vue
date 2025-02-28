@@ -1,24 +1,25 @@
 <template>
-    <div class="flex justify-between items-center min-h-screen">
-        <img src="/image/auth/Group 67.png" alt="Group">
-        <div class="flex flex-col justify-center items-center">
-            <h1 class="text-4xl font-semibold">Присоединяйтесь к нашей команде!</h1>
-            <p class="mt-2">Заполните пожалуйста три формы необходимых для регистрации</p>
+    <div class="max-w-[510px] mx-auto bg-white rounded-3xl p-6">
+        <div class="flex flex-col justify-center">
             <div class="mt-6">
-                <div class="flex flex-col items-center">
-                    <CountPageRegister :countPages="countPages" />
-                    <component :typeAuth="typeAuth" @toggle-auth="$emit('toggle-auth')" class="mt-8"
-                        :is="currentComponent" @next-step="nextPage" @prev-step="prevStep"
-                        @update:isValid="isValid = $event" @file-selected="handleFileSelected" />
-                </div>
-                <div class="flex justify-end gap-x-4 mt-8">
-                    <button class="px-8 py-3 bg-white text-black rounded-lg text-xl font-medium leading-7"
-                        @click="prevStep" v-if="countPages > 1" :disabled="countPages === 1">Назад</button>
-                    <button class="px-8 py-3 bg-black text-white rounded-lg text-xl font-medium leading-7"
-                        @click="handleClick" :disabled="!isValid">
-                        {{ countPages === 3 ? 'Готово' : 'Далее' }}
-                    </button>
-                </div>
+                <h2 class="text-[40px] leading-[52px] font-semibold text-[#171717]">{{ pageContent[countPages].title }}
+                </h2>
+                <p class="text-[#171717] text-xl mt-2">{{ pageContent[countPages].description }}</p>
+            </div>
+            <div class="flex flex-col items-center mt-8 w-full">
+                <CountPageRegister :countPages="countPages" />
+                <component :typeAuth="typeAuth" @toggle-auth="$emit('toggle-auth')" class="mt-8" :is="currentComponent"
+                    @next-step="nextPage" @prev-step="prevStep" @update:isValid="isValid = $event"
+                    @file-selected="handleFileSelected" />
+            </div>
+            <div class="flex flex-col gap-x-4 mt-8">
+                <button class="px-8 py-3 bg-AccentViolet text-white rounded-lg text-xl font-medium leading-7"
+                    @click="handleClick" :disabled="!isValid">
+                    {{ countPages === 3 ? 'Готово' : 'Продолжить' }}
+                </button>
+                <button class="px-8 py-3 bg-white text-AccentViolet rounded-lg text-xl font-medium leading-7 mt-2"
+                    @click="handleClickLogin">{{ countPages === 1 ? 'Войти в аккаунт' : 'Назад'
+                    }}</button>
             </div>
         </div>
     </div>
@@ -37,6 +38,21 @@ const router = useRouter();
 const countPages = ref(1);
 const isValid = ref(false);
 const authStore = useAuthStore();
+
+const pageContent = {
+    1: {
+        title: "Круто, что ты с нами!",
+        description: "После этого шага тебе нужно будет указать информацию о вузе и добавить портфолио. Дождись проверки анкеты — и ты в деле!"
+    },
+    2: {
+        title: "Расскажи, про ВУЗ!",
+        description: "Укажи, где ты учишься, на каком курсе и факультете."
+    },
+    3: {
+        title: "Продемонстрируй свои навыки!",
+        description: "Добавь портфолио или отзывы клиентов. Это твой шанс выделиться и привлечь больше заказов."
+    }
+}
 
 const props = defineProps({
     typeAuth: {
@@ -75,6 +91,14 @@ const handleClick = async () => {
         nextPage();
     }
 };
+
+const handleClickLogin = () => {
+    if (countPages.value === 1) {
+        router.push({ name: 'login' });
+    } else {
+        prevStep();
+    }
+}
 
 const handleFileSelected = (file) => {
     authStore.setStudentCardPhoto(file);

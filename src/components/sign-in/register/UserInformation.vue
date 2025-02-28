@@ -1,39 +1,69 @@
 <!-- src/widgets/UserInformation.vue -->
 <template>
     <div>
-        <div class="flex flex-col gap-y-4">
-            <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
+        <div class="grid grid-cols-2 gap-4">
+            <input class="px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
                 type="text" placeholder="Логин*" v-model="auth.username">
-            <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
+            <input class="px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
                 type="text" placeholder="Фамилия*" v-model="auth.first_name">
-            <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
+            <input class="px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
                 type="text" placeholder="Имя*" v-model="auth.last_name">
-            <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
+            <input class="px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
+                type="text" placeholder="Отчество*">
+            <input
+                class="col-span-2 px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
                 type="email" placeholder="Email*" v-model="auth.email">
-            <!-- <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
-                type="text" placeholder="Id vk\telegram*" v-model="auth.socialId"> -->
-            <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
+            <input
+                class="col-span-2 px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
                 type="password" placeholder="Пароль" v-model="auth.password">
-            <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
+            <input
+                class="col-span-2 px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
                 type="password" placeholder="Повторите пароль" v-model="passwordRepeat">
         </div>
-        <div>
-            <ForgotThePassword @toggle-auth="$emit('toggle-auth')" :typeAuth="typeAuth" />
+        <div class="mt-4">
+            <h3 class="text-PrimaryDark text-2xl font-medium">Укажи удобный способ связи</h3>
+            <p class="text-LightDark mt-2 leading-5">Добавь Telegram или ВКонтакте. Мы напишем только в случае вопросов
+                по заказу.
+                Чем
+                больше контактов, тем
+                проще связаться!</p>
         </div>
-        <div class="mt-4 flex flex-col gap-y-3">
-            <BoxingCheckForReg v-model:isChecked="isAgreementChecked">
-                <p>Согласие на обработку персональных данных</p>
-            </BoxingCheckForReg>
-            <BoxingCheckForReg v-model:isChecked="isPrivacyPolicyChecked">
-                <p>Соглашаюсь с политикой конфиденциальности</p>
-            </BoxingCheckForReg>
+        <div class="flex gap-x-3 mt-4">
+            <socialMedia>
+                <template #image>
+                    <img src="/image/auth/telegram.svg" alt="socialMedia">
+                </template>
+
+                <template #title>
+                    <h4 class="text-[#29A9EB] text-xl font-medium">Telegram</h4>
+                </template>
+            </socialMedia>
+            <socialMedia>
+                <template #image>
+                    <img src="/image/auth/vk.svg" alt="socialMedia">
+                </template>
+
+                <template #title>
+                    <h4 class="text-[#0077FF] text-xl font-medium">ВКонтакте</h4>
+                </template>
+            </socialMedia>
         </div>
+        <BoxingCheckForReg class="mt-4" v-model:isChecked="isAgreementChecked">
+            <p class="text-sm">Принимаю <span class="text-AccentViolet">Пользовательское соглашение, политику
+                    конфиденциальности
+                    и
+                    политику
+                    использования файлов
+                    cookie.</span>
+            </p>
+        </BoxingCheckForReg>
     </div>
 </template>
 
 <script setup>
 import { useAuthStore } from '@/stores/useAuthStore';
 import { computed, watchEffect, ref, watch } from 'vue';
+import socialMedia from '../widgets/socialMedia.vue';
 import BoxingCheckForReg from '@/ui/BoxingCheckForReg.vue';
 import ForgotThePassword from '@/ui/ForgotThePassword.vue';
 
@@ -61,9 +91,7 @@ const isFormValid = computed(() => {
         auth.value.first_name.trim() !== '' &&
         auth.value.email.trim() !== '' &&
         auth.value.password.trim() !== '' &&
-        auth.value.password === passwordRepeat.value &&
-        isAgreementChecked.value &&
-        isPrivacyPolicyChecked.value
+        auth.value.password === passwordRepeat.value
 });
 
 watchEffect(() => {
