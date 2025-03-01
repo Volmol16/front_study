@@ -1,9 +1,9 @@
 <!-- src/components/sign-in/register/RegistrationSummary.vue -->
 <template>
     <div>
-        <div class="flex flex-col gap-y-4 mt-8">
+        <div class="grid grid-cols-1 gap-4 mt-8">
             <select v-model="selectDicsipline"
-                class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none">
+                class="px-6 py-3 border bg-transparent border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none">
                 <option value="" disabled>
                     Какие дисциплины вы решаете
                 </option>
@@ -11,17 +11,25 @@
                     {{ forms.name }}
                 </option>
             </select>
-            <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
+            <input class="px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
                 type="text" placeholder="О себе" v-model="authStore.data.student_card.about_self">
+            <LoadingFilesForRegistration>
+                <template #input>
+                    <input
+                        class="w-full px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
+                        type="text" :placeholder="!fileSelected ? 'Отзывы заказчиков' : 'Выбран файл: ' + fileName">
+                    <span class="text-TeriaryDark text-xs font-medium px-4 mt-1">Подсказка PNG, JPG</span>
+                </template>
+            </LoadingFilesForRegistration>
+            <LoadingFilesForRegistration>
+                <template #input>
+                    <input
+                        class="w-full px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
+                        type="text" :placeholder="!fileSelected ? 'Портфолио' : 'Выбран файл: ' + fileName">
+                    <span class="text-TeriaryDark text-xs font-medium px-4 mt-1">Подсказка PNG, JPG</span>
+                </template>
+            </LoadingFilesForRegistration>
         </div>
-    </div>
-    <div class="mt-4 flex flex-col gap-y-4">
-        <LoadingFilesForRegistration>
-            <h4>Прикрепите фото студенческого билета</h4>
-        </LoadingFilesForRegistration>
-        <!-- <LoadingFilesForRegistration>
-            <h4>Прикрепите материалы ваших работ</h4>
-        </LoadingFilesForRegistration> -->
     </div>
 </template>
 

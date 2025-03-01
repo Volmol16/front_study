@@ -6,8 +6,8 @@
                 </h2>
                 <p class="text-[#171717] text-xl mt-2">{{ pageContent[countPages].description }}</p>
             </div>
-            <div class="flex flex-col items-center mt-8 w-full">
-                <CountPageRegister :countPages="countPages" />
+            <div class="flex flex-col mt-8 w-full">
+                <CountPageRegister class="mx-auto" :countPages="countPages" />
                 <component :typeAuth="typeAuth" @toggle-auth="$emit('toggle-auth')" class="mt-8" :is="currentComponent"
                     @next-step="nextPage" @prev-step="prevStep" @update:isValid="isValid = $event"
                     @file-selected="handleFileSelected" />
@@ -35,7 +35,7 @@ import { onMounted, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
-const countPages = ref(1);
+const countPages = ref(3);
 const isValid = ref(false);
 const authStore = useAuthStore();
 

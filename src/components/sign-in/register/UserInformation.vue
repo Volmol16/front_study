@@ -63,7 +63,7 @@
 <script setup>
 import { useAuthStore } from '@/stores/useAuthStore';
 import { computed, watchEffect, ref, watch } from 'vue';
-import socialMedia from '../widgets/socialMedia.vue';
+import socialMedia from '@/components/sign-in/widgets/SocialMedia.vue';
 import BoxingCheckForReg from '@/ui/BoxingCheckForReg.vue';
 import ForgotThePassword from '@/ui/ForgotThePassword.vue';
 

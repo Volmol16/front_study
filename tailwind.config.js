@@ -7,6 +7,7 @@ export default {
         PrimaryDark: "#171717",
         LightDark: "#8C8C8C",
         AccentViolet: "#7B44F2",
+        TeriaryDark: "#BFBFBF",
       },
     },
   },

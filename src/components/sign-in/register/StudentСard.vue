@@ -61,6 +61,10 @@
             <input
                 class="px-6 py-3 bg-transparent border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
                 type="email" placeholder="Id telegram*" v-model="telegram">
+
+            <LoadingStudentCard class="col-span-2">
+
+            </LoadingStudentCard>
         </div>
         <!-- src/widgets/StudentСard.vue -->
         <!-- <div class="flex flex-col gap-y-4 mt-4">
@@ -68,9 +72,9 @@
                 <h4>Прикрепите фото студенческого билета</h4>
             </LoadingFilesForRegistration>
         </div> -->
-        <div>
+        <!-- <div>
             <ForgotThePassword @toggle-auth="$emit('toggle-auth')" :typeAuth="typeAuth" />
-        </div>
+        </div> -->
 
     </div>
 </template>
@@ -80,6 +84,7 @@ import { ref, onMounted, computed, watchEffect, watch } from 'vue';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useRegistrationStore } from '@/stores/useRegistrationStore';
 import UserDataService from "@/services/UserDataService";
+import LoadingStudentCard from '../widgets/LoadingStudentCard.vue';
 import LoadingFilesForRegistration from '@/ui/LoadingFilesForRegistration.vue';
 
 const universities = ref([]);

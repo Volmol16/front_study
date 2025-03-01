@@ -1,19 +1,26 @@
-<template>
-    <div class="max-w-[357px]">
-        <slot></slot>
-        <input type="file" class="hidden" @change="handleFileChange" accept="image/*,.pdf" ref="fileInput">
-        <div class="flex flex-col justify-center items-center p-8 border-dashed border-2 border-[#8C8C8E] rounded-2xl mt-2 cursor-pointer"
-            @click="$refs.fileInput.click()">
-            <img src="/image/auth/Vector.svg" alt="Download" loading="lazy" class="mb-4">
-            <p class="text-center font-medium text-[#8C8C8E]">
-                <span v-if="!fileSelected">Перетащите файлы сюда или нажмите, чтобы загрузить</span>
-                <span v-else class="text-black">
-                    Выбран файл: {{ fileName }}
-                </span>
-            </p>
+    <template>
+        <div>
+            <slot name="input">
+                <div class="flex flex-col">
+                    <input
+                        class="px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
+                        type="text" :placeholder="!fileSelected ? 'Отзывы заказчиков' : 'Выбран файл: ' + fileName">
+                    <span class="text-TeriaryDark text-xs font-medium px-4 mt-1">Подсказка PNG, JPG</span>
+                </div>
+            </slot>
+            <slot name="button">
+                <input type="file" class="hidden" @change="handleFileChange" accept="image/*,.pdf" ref="fileInput">
+
+            </slot>
+            <div class="flex flex-col justify-center items-center p-4 mt-2 cursor-pointer"
+                @click="$refs.fileInput.click()">
+                <p class="flex items-center gap-x-2 text-center font-medium text-[#8C8C8E]">
+                    Добавить файл
+                    <img src="/image/auth/plus1.svg">
+                </p>
+            </div>
         </div>
-    </div>
-</template>
+    </template>
 
 <script setup>
 import { ref } from 'vue';
