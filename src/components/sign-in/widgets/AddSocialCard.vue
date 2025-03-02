@@ -1,0 +1,66 @@
+<template>
+    <div class="bg-white px-6 pt-5 pb-12 rounded-2xl max-w-[510px] mx-auto mt-[10vh]">
+        <button @click="closeModal">
+            <img src="/image/auth/left.svg" alt="Left">
+        </button>
+        <div class="flex flex-col items-center">
+            <img width="56" :src="socialData.icon" :alt="socialData.title">
+            <h4 class="mt-4 text-2xl text-PrimaryDark font-medium">{{ socialData.title }}</h4>
+            <span class="mt-2 text-LightDark">{{ socialData.subtitle }}</span>
+        </div>
+        <div class="flex flex-col mt-8">
+            <input class="px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
+                type="text" :placeholder="socialData.placeholder" v-model="profile[socialData.storeField]">
+            <button class="mt-8 w-full py-3 bg-AccentViolet text-white text-xl font-medium rounded-xl"
+                @click="saveSocial">
+                Сохранить
+            </button>
+        </div>
+    </div>
+</template>
+
+<script setup>
+import { useModalStore } from '@/stores/modalStore';
+import { useAuthStore } from '@/stores/useAuthStore';
+import { computed, ref } from 'vue';
+
+const modalStore = useModalStore();
+const profile = computed(() => authStore.data.profile);
+const authStore = useAuthStore();
+const { closeModal } = modalStore;
+
+const props = defineProps({
+    socialType: {
+        type: String,
+        required: true,
+        validator: value => ['telegram', 'vk'].includes(value),
+    },
+});
+
+const socialValue = ref('');
+
+const socialData = computed(() => {
+    return {
+        telegram: {
+            icon: '/image/auth/telegram.svg',
+            title: 'Telegram',
+            subtitle: 'Добавить контакт',
+            placeholder: '@username',
+            storeField: 'telegram_username',
+        },
+        vk: {
+            icon: '/image/auth/vk.svg',
+            title: 'ВКонтакте',
+            subtitle: 'Добавить контакт',
+            placeholder: 'vk.com/username',
+            storeField: 'vk_profile',
+        },
+    }[props.socialType];
+});
+
+const saveSocial = () => {
+    closeModal();
+    console.log(authStore.data.profile);
+
+};
+</script>

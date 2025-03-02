@@ -22,10 +22,10 @@ const authRoutes = [
         meta: { requiresGuest: true },
       },
       {
-        path: "register-success",
-        name: "register-success",
-        component: () => import("@/pages/sign-in/RegistrySuccessfulPages.vue"),
-        meta: { requiresGuest: true },
+        name: "sending-questionnaire",
+        path: "/sending-questionnaire",
+        component: () =>
+          import("@/components/sign-in/register/SendingQuestionnaire.vue"),
       },
     ],
   },

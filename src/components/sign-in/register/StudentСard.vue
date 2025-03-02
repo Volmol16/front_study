@@ -6,7 +6,7 @@
             <!-- Университеты -->
             <select v-model="selectedUniversity" @change="fetchFaculties" :disabled="loading"
                 class="col-span-2 px-6 py-3 bg-transparent border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none">
-                <option value="" disabled>Выберите вуз</option>
+                <option value="" disabled>ВУЗ</option>
                 <option v-for="university in universities" :key="university.id" :value="university.id">
                     {{ university.name }}
                 </option>
@@ -34,17 +34,6 @@
                 </option>
             </select>
 
-            <!-- Форма обучения -->
-            <select v-model="selectEducationForm" :disabled="!selectedDepartment || loading"
-                class="px-6 py-3 bg-transparent border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none">
-                <option value="" disabled>
-                    {{ educationForms.length ? 'Выберите форму обучения' : 'Нет доступных форм обучения' }}
-                </option>
-                <option v-for="forms in educationForms" :key="forms.id" :value="forms.id">
-                    {{ forms.name }}
-                </option>
-            </select>
-
             <!-- Курс -->
             <select v-model="course" :disabled="!selectedDepartment || loading"
                 class="px-6 py-3 bg-transparent border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none">
@@ -55,27 +44,20 @@
                 <option value="4">4</option>
             </select>
 
-            <input
-                class="px-6 py-3 bg-transparent border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
-                type="email" placeholder="Id vk" v-model="vk">
-            <input
-                class="px-6 py-3 bg-transparent border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
-                type="email" placeholder="Id telegram*" v-model="telegram">
-
+            <!-- Форма обучения -->
+            <select v-model="selectEducationForm" :disabled="!selectedDepartment || loading"
+                class="px-6 py-3 bg-transparent border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none">
+                <option value="" disabled>
+                    {{ educationForms.length ? 'Уровень образования' : 'Нет доступных форм обучения' }}
+                </option>
+                <option v-for="forms in educationForms" :key="forms.id" :value="forms.id">
+                    {{ forms.name }}
+                </option>
+            </select>
             <LoadingStudentCard class="col-span-2">
 
             </LoadingStudentCard>
         </div>
-        <!-- src/widgets/StudentСard.vue -->
-        <!-- <div class="flex flex-col gap-y-4 mt-4">
-            <LoadingFilesForRegistration>
-                <h4>Прикрепите фото студенческого билета</h4>
-            </LoadingFilesForRegistration>
-        </div> -->
-        <!-- <div>
-            <ForgotThePassword @toggle-auth="$emit('toggle-auth')" :typeAuth="typeAuth" />
-        </div> -->
-
     </div>
 </template>
 
@@ -85,15 +67,12 @@ import { useAuthStore } from '@/stores/useAuthStore';
 import { useRegistrationStore } from '@/stores/useRegistrationStore';
 import UserDataService from "@/services/UserDataService";
 import LoadingStudentCard from '../widgets/LoadingStudentCard.vue';
-import LoadingFilesForRegistration from '@/ui/LoadingFilesForRegistration.vue';
 
 const universities = ref([]);
 const faculties = ref([]);
 const departments = ref([]);
 const educationForms = ref([]);
 const course = ref('');
-const vk = ref('');
-const telegram = ref('');
 const selectedUniversity = ref('');
 const selectedFaculty = ref('');
 const selectedDepartment = ref('');
@@ -108,8 +87,7 @@ const isFormValid = computed(() => {
         selectedFaculty.value &&
         selectedDepartment.value &&
         selectEducationForm.value &&
-        course.value &&
-        telegram.value;
+        course.value;
 });
 
 watchEffect(() => {
@@ -178,15 +156,13 @@ const fetchEducationForms = async () => {
     }
 }
 
-watch([selectedUniversity, selectedFaculty, selectEducationForm, selectedDepartment, course, vk, telegram], () => {
+watch([selectedUniversity, selectedFaculty, selectEducationForm, selectedDepartment, course], () => {
     authStore.setSelectedDepartment(selectedDepartment.value)
     authStore.data.profile.university = selectedUniversity.value;
     authStore.data.profile.faculty = selectedFaculty.value;
     authStore.data.profile.department = selectedDepartment.value;
     authStore.data.profile.form_of_study = selectEducationForm.value;
     authStore.data.profile.course = course.value;
-    authStore.data.profile.vk_profile = vk.value;
-    authStore.data.profile.telegram_username = telegram.value;
     // registrationStore.setSelectedUniversity();
     // registrationStore.setSelectedFaculuty();
     // registrationStore.setSelectedDepartment();

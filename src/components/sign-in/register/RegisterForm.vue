@@ -1,3 +1,4 @@
+<!-- @/components/sign-in/register/RegisterForm.vue -->
 <template>
     <div class="max-w-[510px] mx-auto bg-white rounded-3xl p-6">
         <div class="flex flex-col justify-center">
@@ -10,7 +11,7 @@
                 <CountPageRegister class="mx-auto" :countPages="countPages" />
                 <component :typeAuth="typeAuth" @toggle-auth="$emit('toggle-auth')" class="mt-8" :is="currentComponent"
                     @next-step="nextPage" @prev-step="prevStep" @update:isValid="isValid = $event"
-                    @file-selected="handleFileSelected" />
+                    @file-selected="handleFileSelected" @open-modal="$emit('open-modal')" />
             </div>
             <div class="flex flex-col gap-x-4 mt-8">
                 <button class="px-8 py-3 bg-AccentViolet text-white rounded-lg text-xl font-medium leading-7"
@@ -35,7 +36,7 @@ import { onMounted, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
-const countPages = ref(3);
+const countPages = ref(1);
 const isValid = ref(false);
 const authStore = useAuthStore();
 
@@ -83,7 +84,11 @@ const handleClick = async () => {
 
             await authStore.postPhoto();
 
-            router.push({ name: 'register-success' });
+            const status = localStorage.getItem("Verefication")
+
+            if (status === 'true') {
+                router.push({ name: 'sending-questionnaire' });
+            }
         } catch (error) {
             console.error("Ошибка регистрации:", error);
         }

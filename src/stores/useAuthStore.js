@@ -13,6 +13,7 @@ export const useAuthStore = defineStore("auth", {
     profileId: null,
     isRegistered: false,
     selectedDepartment: null,
+    Verefication: false,
     data: {
       user: {
         username: "",
@@ -57,6 +58,7 @@ export const useAuthStore = defineStore("auth", {
           this.isRegistered = true;
           this.userId = response.data.user_id;
           this.profileId = response.data.profile_id;
+          localStorage.setItem("Verefication", true);
         });
       } catch (error) {
         console.error("Ошибка регистрации:", {

@@ -1,6 +1,6 @@
 <!-- src/widgets/LoginUserInformation.vue -->
 <template>
-    <div class="flex flex-col justify-center items-center">
+    <div class="flex flex-col justify-center items-center bg-white rounded-2xl p-4">
         <h2 class="text-[36px] font-semibold">С возвращением!</h2>
         <div class="flex flex-col gap-y-4 mt-6">
             <input class="w-[356px] px-6 py-3 bg-[#D9D9D9] rounded-lg text-[#8C8C8E] font-medium focus:outline-none"
