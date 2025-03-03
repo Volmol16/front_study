@@ -9,7 +9,7 @@
         <div class="flex gap-x-5 ">
             <blockquote>
                 <select class="bg-white">
-                    <option>Статусы</option>
+                    <option>Статусыc</option>
                     <option>Все</option>
                     <option>В работе</option>
                     <option>Отложенные</option>
