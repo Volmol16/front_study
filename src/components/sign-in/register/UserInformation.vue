@@ -1,68 +1,18 @@
 <!-- src/widgets/UserInformation.vue -->
 <template>
-    <div>
+    <div class="">
         <div class="grid grid-cols-2 gap-4">
-            <div v-for="input in inputList" :key="input.id">
-                <div class="relative">
-                    <input
-                        class="px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none w-full"
-                        type="text" id="username" v-model="auth.username" @focus="handleFocus" @blur="handleBlur">
-                    <label for="username"
-                        class="absolute left-6 top-3 text-[#BFBFBF] font-medium transition-all duration-200 pointer-events-none"
-                        :class="{ 'floating-label': isFocused.username || auth.username }">
-                        Логин*
-                    </label>
-                </div>
-            </div>
-            <div class="relative">
-                <input
-                    class="px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none w-full"
-                    type="text" id="username" v-model="auth.username" @focus="handleFocus" @blur="handleBlur">
-                <label for="username"
-                    class="absolute left-6 top-3 text-[#BFBFBF] font-medium transition-all duration-200 pointer-events-none"
-                    :class="{ 'floating-label': isFocused.username || auth.username }">
-                    Логин*
-                </label>
-            </div>
-            <div class="relative">
-                <input
-                    class="px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none w-full"
-                    type="text" id="first_name" v-model="auth.first_name" @focus="handleFocus" @blur="handleBlur">
-                <label for="first_name"
-                    class="absolute left-6 top-3 text-[#BFBFBF] font-medium transition-all duration-200 pointer-events-none"
-                    :class="{ 'floating-label': isFocused.first_name || auth.first_name }">
-                    Фамилия*
-                </label>
-            </div>
-            <div class="relative">
-                <input
-                    class="px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none w-full"
-                    type="text" id="last_name" v-model="auth.last_name" @focus="handleFocus" @blur="handleBlur">
-                <label for="last_name"
-                    class="absolute left-6 top-3 text-[#BFBFBF] font-medium transition-all duration-200 pointer-events-none"
-                    :class="{ 'floating-label': isFocused.last_name || auth.last_name }">
-                    Имя*
-                </label>
-            </div>
-            <div class="relative">
-                <input
-                    class="px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none w-full"
-                    type="text" id="name">
-                <label for="name"
-                    class="absolute left-6 top-3 text-[#BFBFBF] font-medium transition-all duration-200 pointer-events-none floating-label">
-                    Отчество*
-                </label>
-            </div>
-            <div class="relative col-span-2">
-                <input
-                    class=" px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none w-full"
-                    type="text" id="email" v-model="auth.email" @focus="handleFocus" @blur="handleBlur">
-                <label for="email"
-                    class="absolute left-6 top-3 text-[#BFBFBF] font-medium transition-all duration-200 pointer-events-none"
-                    :class="{ 'floating-label': isFocused.email || auth.email }">
-                    Email*
-                </label>
-            </div>
+            <input class="px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
+                type="text" placeholder="Логин*" v-model="auth.username">
+            <input class="px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
+                type="text" placeholder="Фамилия*" v-model="auth.first_name">
+            <input class="px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
+                type="text" placeholder="Имя*" v-model="auth.last_name">
+            <input class="px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
+                type="text" placeholder="Отчество*">
+            <input
+                class="col-span-2 px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
+                type="email" placeholder="Email*" v-model="auth.email">
             <input
                 class="col-span-2 px-6 py-3 border border-[#BFBFBF] rounded-lg text-[#BFBFBF] font-medium focus:outline-none"
                 type="password" placeholder="Пароль" v-model="auth.password">
@@ -130,39 +80,6 @@ const props = defineProps({
         type: Boolean,
     }
 })
-
-const inputList = [
-    {
-        id: 'username',
-        placeholder: 'Логин',
-        model: 'username'
-    },
-    {
-        id: 'first_name',
-        placeholder: 'Имя',
-        model: 'first_name'
-    },
-    {
-        id: 'last_name',
-        placeholder: 'Фамилия',
-        model: 'last_name'
-    },
-    {
-        id: 'email',
-        placeholder: 'Email',
-        model: 'email'
-    },
-    {
-        id: 'password',
-        placeholder: 'Пароль',
-        model: 'password'
-    },
-    {
-        id: 'passwordRepeat',
-        placeholder: 'Повторите пароль',
-        model: 'passwordRepeat'
-    }
-]
 
 const isFocused = ref({
     username: false,

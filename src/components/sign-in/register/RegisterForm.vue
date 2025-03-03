@@ -1,26 +1,30 @@
 <!-- @/components/sign-in/register/RegisterForm.vue -->
 <template>
-    <div class="max-w-[510px] mx-auto bg-white rounded-3xl p-6">
-        <div class="flex flex-col justify-center">
-            <div class="mt-6">
-                <h2 class="text-[40px] leading-[52px] font-semibold text-[#171717]">{{ pageContent[countPages].title }}
-                </h2>
-                <p class="text-[#171717] text-xl mt-2">{{ pageContent[countPages].description }}</p>
-            </div>
-            <div class="flex flex-col mt-8 w-full">
-                <CountPageRegister class="mx-auto" :countPages="countPages" />
-                <component :typeAuth="typeAuth" @toggle-auth="$emit('toggle-auth')" class="mt-8" :is="currentComponent"
-                    @next-step="nextPage" @prev-step="prevStep" @update:isValid="isValid = $event"
-                    @file-selected="handleFileSelected" @open-modal="$emit('open-modal')" />
-            </div>
-            <div class="flex flex-col gap-x-4 mt-8">
-                <button class="px-8 py-3 bg-AccentViolet text-white rounded-lg text-xl font-medium leading-7"
-                    @click="handleClick" :disabled="!isValid">
-                    {{ countPages === 3 ? 'Готово' : 'Продолжить' }}
-                </button>
-                <button class="px-8 py-3 bg-white text-AccentViolet rounded-lg text-xl font-medium leading-7 mt-2"
-                    @click="handleClickLogin">{{ countPages === 1 ? 'Войти в аккаунт' : 'Назад'
-                    }}</button>
+    <div class="inset-0 z-50 backface-hidden">
+        <div class="max-w-[510px] mx-auto bg-white rounded-3xl p-6 slide-up">
+            <div class="flex flex-col justify-center">
+                <div class="mt-6">
+                    <h2 class="text-[40px] leading-[52px] font-semibold text-[#171717]">{{ pageContent[countPages].title
+                    }}
+                    </h2>
+                    <p class="text-[#171717] text-xl mt-2">{{ pageContent[countPages].description }}</p>
+                </div>
+                <div class="flex flex-col mt-8 w-full">
+                    <CountPageRegister class="mx-auto" :countPages="countPages" />
+                    <component :typeAuth="typeAuth" @toggle-auth="$emit('toggle-auth')" class="mt-8"
+                        :is="currentComponent" @next-step="nextPage" @prev-step="prevStep"
+                        @update:isValid="isValid = $event" @file-selected="handleFileSelected"
+                        @open-modal="$emit('open-modal')" />
+                </div>
+                <div class="flex flex-col gap-x-4 mt-8">
+                    <button class="px-8 py-3 bg-AccentViolet text-white rounded-lg text-xl font-medium leading-7"
+                        @click="handleClick" :disabled="!isValid">
+                        {{ countPages === 3 ? 'Готово' : 'Продолжить' }}
+                    </button>
+                    <button class="px-8 py-3 bg-white text-AccentViolet rounded-lg text-xl font-medium leading-7 mt-2"
+                        @click="handleClickLogin">{{ countPages === 1 ? 'Войти в аккаунт' : 'Назад'
+                        }}</button>
+                </div>
             </div>
         </div>
     </div>
@@ -125,3 +129,28 @@ onMounted(() => {
     authStore.referralCode()
 }) 
 </script>
+
+<style scoped>
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.slide-up {
+    animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.backface-hidden {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+</style>
