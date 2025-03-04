@@ -27,6 +27,18 @@ const authRoutes = [
         component: () =>
           import("@/components/sign-in/register/SendingQuestionnaire.vue"),
       },
+      {
+        name: "success-questionnaire",
+        path: "/success-questionnaire",
+        component: () =>
+          import("@/components/sign-in/register/SuccessfulQuestionnaire.vue"),
+      },
+      {
+        name: "edit-questionnaire",
+        path: "/edit-questionnaire",
+        component: () =>
+          import("@/components/sign-in/register/EditQuestionnaire.vue"),
+      },
     ],
   },
 ];

@@ -13,7 +13,7 @@ export const useAuthStore = defineStore("auth", {
     profileId: null,
     isRegistered: false,
     selectedDepartment: null,
-    Verefication: false,
+    verificationStatus: null, // 'pending', 'approved', 'rejected'
     data: {
       user: {
         username: "",
@@ -40,6 +40,71 @@ export const useAuthStore = defineStore("auth", {
     },
   }),
   actions: {
+    // async statusVerefication() {
+    //   const status = localStorage.getItem("Verefication");
+    //   if (status === "true") {
+    //     const interval = setInterval(async () => {
+    //       try {
+    //         const response = await userDataService.getStatus(this.userId);
+    //         if (response.status === 200) {
+    //           await this.handleStatusResponse(response);
+    //           clearInterval(interval);
+    //         }
+    //       } catch (error) {
+    //         console.log(error);
+    //       }
+    //     }, 5000);
+    //   }
+    // },
+
+    async statusVerefication() {
+      if (this.verificationStatus === "pending") {
+        const interval = setInterval(async () => {
+          try {
+            const mockResponse = await new Promise((resolve, reject) => {
+              setTimeout(() => {
+                resolve({
+                  data: {
+                    status: "Пользователь успешно принят",
+                  },
+                });
+              }, 2000);
+            });
+
+            await this.handleStatusResponse(mockResponse);
+            clearInterval(interval);
+          } catch (error) {
+            console.error("Ошибка при проверке статуса:", error);
+          }
+        }, 5000);
+      }
+    },
+
+    async handleStatusResponse(response) {
+      const { status } = response.data;
+
+      if (status === "Пользователь успешно принят") {
+        router.push({ name: "success-questionnaire" });
+      } else if (status === "Отправлено на доработку") {
+        router.push({ name: "edit-questionnaire" });
+      } else {
+        console.log("Неизвестный статус:", status);
+      }
+    },
+
+    async checkVerification() {
+      try {
+        const response = await userDataService.getVerificationStatus(
+          this.userId
+        );
+        this.verificationStatus = response.data.status;
+        return response.data.status;
+      } catch (error) {
+        console.error("Ошибка проверки статуса:", error);
+        return null;
+      }
+    },
+
     async referralCode() {
       const route = useRoute();
       const referralCode = route.query.referral_code;
@@ -58,7 +123,7 @@ export const useAuthStore = defineStore("auth", {
           this.isRegistered = true;
           this.userId = response.data.user_id;
           this.profileId = response.data.profile_id;
-          localStorage.setItem("Verefication", true);
+          this.verificationStatus = "pending";
         });
       } catch (error) {
         console.error("Ошибка регистрации:", {
