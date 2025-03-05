@@ -32,7 +32,7 @@ const settingProfile = [
     children: [
       {
         name: "sending-questionnaire",
-        path: "/sending-questionnaire",
+        path: "sending-questionnaire",
         component: () =>
           import(
             "@/components/sign-in/register/SettignProfile/SendingQuestionnaire.vue"
@@ -41,7 +41,7 @@ const settingProfile = [
       },
       {
         name: "success-questionnaire",
-        path: "/success-questionnaire",
+        path: "success-questionnaire",
         component: () =>
           import(
             "@/components/sign-in/register/SettignProfile/SuccessfulQuestionnaire.vue"
@@ -50,16 +50,42 @@ const settingProfile = [
       },
       {
         name: "edit-questionnaire",
-        path: "/edit-questionnaire",
-        component: () =>
-          import(
-            "@/components/sign-in/register/SettignProfile/EditQuestionnaire.vue"
-          ),
-        meta: { requiresRejection: true },
+        path: "edit-questionnaire",
+        component: () => import("@/pages/sign-in/EditQuestionnaire.vue"),
+        children: [
+          {
+            path: "",
+            redirect: { name: "questionnaire" },
+          },
+          {
+            name: "feedback",
+            path: "feedback",
+            component: () =>
+              import(
+                "@/components/sign-in/register/EditQuestionnaire/feedback.vue"
+              ),
+          },
+          {
+            name: "questionnaire",
+            path: "questionnaire",
+            component: () =>
+              import(
+                "@/components/sign-in/register/EditQuestionnaire/Questionnaire.vue"
+              ),
+          },
+          {
+            name: "history",
+            path: "history",
+            component: () =>
+              import(
+                "@/components/sign-in/register/EditQuestionnaire/History.vue"
+              ),
+          },
+        ],
       },
       {
         name: "unshaked-questionnaire",
-        path: "/unshaked-questionnaire",
+        path: "unshaked-questionnaire",
         component: () =>
           import(
             "@/components/sign-in/register/SettignProfile/UnshakedQuestionnaire.vue"
@@ -69,6 +95,41 @@ const settingProfile = [
     ],
   },
 ];
+
+// const editQuestionnaire = [
+//   {
+//     path: "/edit-questionnaire",
+//     component: () => import("@/pages/sign-in/EditQuestionnaire.vue"),
+//     children: [
+//       {
+//         path: "",
+//         redirect: { name: "questionnaire" },
+//       },
+//       {
+//         name: "feedback",
+//         path: "feedback",
+//         component: () =>
+//           import(
+//             "@/components/sign-in/register/EditQuestionnaire/feedback.vue"
+//           ),
+//       },
+//       {
+//         name: "questionnaire",
+//         path: "questionnaire",
+//         component: () =>
+//           import(
+//             "@/components/sign-in/register/EditQuestionnaire/Questionnaire.vue"
+//           ),
+//       },
+//       {
+//         name: "history",
+//         path: "history",
+//         component: () =>
+//           import("@/components/sign-in/register/EditQuestionnaire/History.vue"),
+//       },
+//     ],
+//   },
+// ];
 
 const adminRoutes = [
   {

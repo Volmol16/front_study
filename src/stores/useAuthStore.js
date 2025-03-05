@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { useRoute } from "vue-router";
 import userDataService from "@/services/UserDataService";
+import { useCheckStore } from "./useCheackStore";
 import router from "@/app/router";
 
 export const useAuthStore = defineStore("auth", {
@@ -11,6 +12,7 @@ export const useAuthStore = defineStore("auth", {
     profileId: null,
     isRegistered: false,
     selectedDepartment: null,
+    verificationStatus: null,
     data: {
       user: {
         username: "",
@@ -37,23 +39,6 @@ export const useAuthStore = defineStore("auth", {
     },
   }),
   actions: {
-    // async statusVerefication() {
-    //   const status = localStorage.getItem("Verefication");
-    //   if (status === "true") {
-    //     const interval = setInterval(async () => {
-    //       try {
-    //         const response = await userDataService.getStatus(this.userId);
-    //         if (response.status === 200) {
-    //           await this.handleStatusResponse(response);
-    //           clearInterval(interval);
-    //         }
-    //       } catch (error) {
-    //         console.log(error);
-    //       }
-    //     }, 5000);
-    //   }
-    // },
-
     async referralCode() {
       const route = useRoute();
       const referralCode = route.query.referral_code;
@@ -133,13 +118,21 @@ export const useAuthStore = defineStore("auth", {
             sessionStorage.setItem("user", response.data.user.role);
             this.isAuth = true;
             this.userRole = response.data.user.role;
-            router.push({ name: "home" });
+            const checkStore = useCheckStore();
+            const status = checkStore.checkVerificationStatus();
+            const currentStaus = status.data.status;
+            this.verificationStatus = currentStaus;
+
+            const routeName = this.getRedirectRoute(currentStaus);
+            router.push({ name: routeName });
+
+            return { success: true, data: response.data };
           })
           .catch((e) => {
             console.log(e);
+            this.resetAuthState();
+            sessionStorage.clear();
           });
-
-        return { success: true, data: response.data };
       } catch (error) {
         console.error("Ошибка авторизации:", {
           status: error.response?.status,
@@ -150,6 +143,19 @@ export const useAuthStore = defineStore("auth", {
       }
     },
 
+    getRedirectRoute(status) {
+      const editStatuses = [
+        "Отправлен на доработку",
+        "Отклонена верификация по СБ",
+        "Отклонена анкета исполнителя",
+      ];
+
+      return editStatuses.includes(status)
+        ? "edit-questionnaire"
+        : status === "Принят"
+        ? "home"
+        : "sending-questionnaire";
+    },
     checkAuth() {
       const token = sessionStorage.getItem("access_token");
       const role = sessionStorage.getItem("user");
@@ -170,6 +176,12 @@ export const useAuthStore = defineStore("auth", {
       this.isRegistered = false;
       this.userId = null;
       this.profileId = null;
+    },
+
+    resetAuthState() {
+      this.isAuth = false;
+      this.userRole = null;
+      this.verificationStatus = null;
     },
 
     setStudentCardPhoto(file) {

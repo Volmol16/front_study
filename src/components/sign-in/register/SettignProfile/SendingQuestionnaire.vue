@@ -11,3 +11,18 @@
         </div>
     </div>
 </template>
+
+<script setup>
+import { onUnmounted } from 'vue';
+import { useCheckStore } from '@/stores/useCheackStore';
+
+const checkStore = useCheckStore();
+
+const intervalId = setInterval(() => {
+    checkStore.checkVerificationStatus();
+}, 5000);
+
+onUnmounted(() => {
+    clearInterval(intervalId);
+});
+</script>

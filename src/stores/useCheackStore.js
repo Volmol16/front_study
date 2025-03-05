@@ -11,10 +11,15 @@ export const useCheckStore = defineStore("check", {
         await UserDataService.chechStatusVerification(user_id).then(
           (response) => {
             this.handleStatusResponse(response.data);
+            return response;
           }
         );
       } catch (error) {
         console.log(error);
+        if (!user_id) {
+          console.error("User ID not found in localStorage");
+          throw new Error("Требуется повторная авторизация");
+        }
       }
     },
 
