@@ -16,4 +16,6 @@ const authStore = useAuthStore();
 onMounted(() => {
     authStore.checkAuth();
 });
+
+authStore.initializeMockData();
 </script>

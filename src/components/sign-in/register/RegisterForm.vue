@@ -85,9 +85,7 @@ const handleClick = async () => {
     if (countPages.value === 3) {
         try {
             await authStore.register();
-
             await authStore.postPhoto();
-            router.push({ name: 'sending-questionnaire' });
         } catch (error) {
             console.error("Ошибка регистрации:", error);
         }

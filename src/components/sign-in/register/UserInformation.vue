@@ -60,7 +60,7 @@
 
 <script setup>
 import { useAuthStore } from '@/stores/useAuthStore';
-import { useModalStore } from '@/stores/modalStore';
+import { useModalStore } from '@/stores/useModalStore';
 import { computed, watchEffect, ref, watch } from 'vue';
 import socialMedia from '@/components/sign-in/widgets/SocialMedia.vue';
 import BoxingCheckForReg from '@/ui/BoxingCheckForReg.vue';

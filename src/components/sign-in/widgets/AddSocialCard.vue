@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import { useModalStore } from '@/stores/modalStore';
+import { useModalStore } from '@/stores/useModalStore';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { computed, ref } from 'vue';
 

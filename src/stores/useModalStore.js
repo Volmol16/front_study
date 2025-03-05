@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 export const useModalStore = defineStore("modal", {
   state: () => ({
-    activeSocial: null, // 'telegram' или 'vk'
+    activeSocial: null,
   }),
   actions: {
     openModal(socialType) {

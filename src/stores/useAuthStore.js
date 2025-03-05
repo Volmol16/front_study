@@ -1,7 +1,5 @@
 import { defineStore } from "pinia";
-import axios from "axios";
 import { useRoute } from "vue-router";
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import userDataService from "@/services/UserDataService";
 import router from "@/app/router";
 
@@ -13,7 +11,6 @@ export const useAuthStore = defineStore("auth", {
     profileId: null,
     isRegistered: false,
     selectedDepartment: null,
-    verificationStatus: null, // 'pending', 'approved', 'rejected'
     data: {
       user: {
         username: "",
@@ -57,54 +54,6 @@ export const useAuthStore = defineStore("auth", {
     //   }
     // },
 
-    async statusVerefication() {
-      if (this.verificationStatus === "pending") {
-        const interval = setInterval(async () => {
-          try {
-            const mockResponse = await new Promise((resolve, reject) => {
-              setTimeout(() => {
-                resolve({
-                  data: {
-                    status: "Пользователь успешно принят",
-                  },
-                });
-              }, 2000);
-            });
-
-            await this.handleStatusResponse(mockResponse);
-            clearInterval(interval);
-          } catch (error) {
-            console.error("Ошибка при проверке статуса:", error);
-          }
-        }, 5000);
-      }
-    },
-
-    async handleStatusResponse(response) {
-      const { status } = response.data;
-
-      if (status === "Пользователь успешно принят") {
-        router.push({ name: "success-questionnaire" });
-      } else if (status === "Отправлено на доработку") {
-        router.push({ name: "edit-questionnaire" });
-      } else {
-        console.log("Неизвестный статус:", status);
-      }
-    },
-
-    async checkVerification() {
-      try {
-        const response = await userDataService.getVerificationStatus(
-          this.userId
-        );
-        this.verificationStatus = response.data.status;
-        return response.data.status;
-      } catch (error) {
-        console.error("Ошибка проверки статуса:", error);
-        return null;
-      }
-    },
-
     async referralCode() {
       const route = useRoute();
       const referralCode = route.query.referral_code;
@@ -123,7 +72,9 @@ export const useAuthStore = defineStore("auth", {
           this.isRegistered = true;
           this.userId = response.data.user_id;
           this.profileId = response.data.profile_id;
-          this.verificationStatus = "pending";
+          localStorage.setItem("user_id", this.userId);
+          router.push({ name: "sending-questionnaire" });
+          console.log(response);
         });
       } catch (error) {
         console.error("Ошибка регистрации:", {
@@ -132,6 +83,16 @@ export const useAuthStore = defineStore("auth", {
           message: error.message,
         });
         throw error;
+      }
+    },
+
+    async initializeMockData() {
+      const savedData = sessionStorage.getItem("mockVerification");
+      if (savedData) {
+        const { userId, status, count } = JSON.parse(savedData);
+        this.userId = userId;
+        this.verificationStatus = status;
+        this.verificationCheckCount = count;
       }
     },
 

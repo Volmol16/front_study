@@ -40,4 +40,10 @@ export default {
   getDisciplines(educationFormId) {
     return http.get(`api/auth/discipline/?department_id=${educationFormId}`);
   },
+
+  chechStatusVerification(userId) {
+    return http.post("/api/auth/status-verification-check/", {
+      user_id: userId,
+    });
+  },
 };

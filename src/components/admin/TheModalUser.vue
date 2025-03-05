@@ -124,6 +124,8 @@ const props = defineProps({
     },
 });
 
+
+
 const questionnaireAccepted = async (status) => {
     await AdminDataService.postQuestionnaireAccepted(props.user.id, student_card_number.value, status).then(() => {
         isSuccessfully.value = true

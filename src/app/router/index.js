@@ -12,32 +12,59 @@ const authRoutes = [
         path: "register",
         component: () =>
           import("@/components/sign-in/register/RegisterForm.vue"),
-        meta: { requiresGuest: true },
+        meta: { requiresGuest: true, requiresAuthCheck: true },
       },
       {
         name: "login",
         path: "login",
         component: () =>
           import("@/components/sign-in/login/AuthorizationForm.vue"),
-        meta: { requiresGuest: true },
+        meta: { requiresGuest: true, requiresVerificationCheck: true },
       },
+    ],
+  },
+];
+
+const settingProfile = [
+  {
+    path: "/settingProfile",
+    component: () => import("@/layout/ProfileSettingLayout.vue"),
+    children: [
       {
         name: "sending-questionnaire",
         path: "/sending-questionnaire",
         component: () =>
-          import("@/components/sign-in/register/SendingQuestionnaire.vue"),
+          import(
+            "@/components/sign-in/register/SettignProfile/SendingQuestionnaire.vue"
+          ),
+        meta: { requiresApproval: true },
       },
       {
         name: "success-questionnaire",
         path: "/success-questionnaire",
         component: () =>
-          import("@/components/sign-in/register/SuccessfulQuestionnaire.vue"),
+          import(
+            "@/components/sign-in/register/SettignProfile/SuccessfulQuestionnaire.vue"
+          ),
+        meta: { requiresApproval: true },
       },
       {
         name: "edit-questionnaire",
         path: "/edit-questionnaire",
         component: () =>
-          import("@/components/sign-in/register/EditQuestionnaire.vue"),
+          import(
+            "@/components/sign-in/register/SettignProfile/EditQuestionnaire.vue"
+          ),
+        meta: { requiresRejection: true },
+      },
+      {
+        name: "unshaked-questionnaire",
+        path: "/unshaked-questionnaire",
+        component: () =>
+          import(
+            "@/components/sign-in/register/SettignProfile/UnshakedQuestionnaire.vue"
+          ),
+        meta: { requiresRejection: true },
       },
     ],
   },
@@ -253,6 +280,7 @@ const routes = [
     ],
   },
   ...authRoutes,
+  ...settingProfile,
   {
     path: "/404",
     name: "404",
